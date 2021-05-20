@@ -4,9 +4,10 @@ import LibraryController from "../controllers/LibraryController.js";
 const router = express.Router();
 
 router
-    .get("/", (req, res) => {
-        res.status(200).json({message: "Here's the root of the server!"});
-    })
-    .get("/libraries", LibraryController.getAll);
+    .get("/", LibraryController.getAll)
+    // TODO: How to implement proper routing for handling different queries? Do
+    // I need different routes for when the user wants the index, or only a specific
+    // chapter?
+    .get("/libraries/", LibraryController.getChapter);
 
 export default {routes: router};

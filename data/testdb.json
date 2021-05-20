@@ -20,6 +20,13 @@
                         "tags": ["flowers", "sentience", "obliviousness"],
                         "chapters": [
                             {
+                                "path": "./data/a1/a1_index.md",
+                                "name": "Why Flowers Won't Talk To You: Index",
+                                "tags": ["index", "outline", "foreword"],
+                                "parent_document": "a1",
+                                "last_modified": "20-05-2021, 22:01"
+                            },
+                            {
                                 "path": "./data/a1/a1_01.md",
                                 "name": "The Easy Answers First",
                                 "tags": ["mouthless", "nobrain", "inanimate"],
@@ -30,6 +37,7 @@
                     }
                 ]
             }
-        ]
+        ],
+        "documents": ["a1"]
     }
 ]
