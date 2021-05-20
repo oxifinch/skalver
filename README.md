@@ -8,14 +8,20 @@ Skalver uses Markdown files to define headers, block quotes, text emphasis, divi
 ---
 
 ## Project Overview
-This is my final project for my first year studying as a web developer, and so, I may have a lot to learn before I can get this app to the level of quality and feature-richness that I want. For the first "feature-complete" version, Skalver will be able to:
+This is my final project for my first year studying as a web developer, and so, I may have a lot to learn before I can get this app to the level of quality and feature-richness that I want. This app is part of my learning process! For this project, I will primarily be using:
+- Nodejs with Express
+- MongoDB for the database
+- Bootstrap for styling
+- A bit of Rust for converting Markdown to HTML
 
+### Key Features
+To be what I consider "ready" for use, Skalver needs to be able to:
 - Register users and allow them to access their documents and collections in the browser.
 - Use the GUI to create, edit, and delete documents and collections. 
 - Set custom styling for each collection by selecting font, text color, page color, and background image.
 - Follow links from one document to another within the same collection.
 
-## "Nice to have" features
+### "Nice to have" Features
 While I will not have a lot of time to work on the app for the alotted project time, I would like to continue to develop it if it turns out nice. The following is a list of features I would want to have and consider integral to the experience, but will have to save for after the actual school project.
 
 - Upload collections as folders with markdown documents from their computer using a command-line tool.
