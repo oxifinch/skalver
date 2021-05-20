@@ -1,0 +1,35 @@
+[
+    {
+        "id": "123",
+        "library_name": "Skalver Knowledge Repository",
+        "library_description": "The central archive of all hitherto existing knowledge of Skalver.",
+        "tags": ["tutorial", "testing", "dev"],
+        "sections": [
+            {
+                "section_name": "Flora & Fauna",
+                "section_description": "Almost everything you need to know about jellyfish and orchids!",
+                "documents": [
+                    {
+                        "document_id": "a1",
+                        "title": "Why Flowers Won't Talk To You",
+                        "subtitle": null,
+                        "description": "The answer might shock you..",
+                        "type": "Essay",
+                        "author": "Preston Callsworth III",
+                        "series": "Collected Works on Underappreciated Organisms",
+                        "tags": ["flowers", "sentience", "obliviousness"],
+                        "chapters": [
+                            {
+                                "path": "./data/a1/a1_01.md",
+                                "name": "The Easy Answers First",
+                                "tags": ["mouthless", "nobrain", "inanimate"],
+                                "parent_document": "a1",
+                                "last_modified": "20-05-2021, 21:33"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
