@@ -1,12 +1,11 @@
-import express from "express";
 import LibraryModel from "../models/LibraryModel.js";
 
-function getAll(req, res) {
+function getAll(_req, res) {
     res.status(200).json(LibraryModel.loadAll()); 
 }
 
 // Fetch and display the user's active library 
-function getActiveLibrary(req, res) {
+function getActiveLibrary(_req, res) {
     // TODO: Look up the user's actual active library and use it to query the
     // database instead of hardcoding it here.
     let activeLibraryId = "123";
@@ -22,4 +21,16 @@ function getActiveLibrary(req, res) {
     }
 }
 
-export default {getAll, getActiveLibrary};
+function getChapter(req, res) {
+    // TODO: Look up the user's actual active library and use it to query the
+    // database instead of hardcoding it here.
+    let activeLibraryId = "123";
+    let doc = req.params.doc;
+    let chapter = 0;
+    let documentData = LibraryModel.loadDocumentChapter(activeLibraryId, doc, chapter);
+    res.render("reading", {
+        doc: documentData
+    });
+}
+
+export default {getAll, getActiveLibrary, getChapter};
