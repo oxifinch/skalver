@@ -1,0 +1,35 @@
+{
+  "name": "skalver",
+  "version": "0.1.0",
+  "description": "A web app for worldbuilders and writers with a focus on ease of use and visual appeal.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oxifinch/skalver.git"
+  },
+  "keywords": [
+    "writing",
+    "worldbuilding",
+    "books",
+    "markdown"
+  ],
+  "author": "oxifinch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oxifinch/skalver/issues"
+  },
+  "homepage": "https://github.com/oxifinch/skalver#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.10"
+  }
+}

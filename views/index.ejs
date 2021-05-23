@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Skalver | Dashboard</title>
+		<meta name="description" content="Dashboard of Skalver web app"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	</head>
+
+	<body>
+        <header>
+            <button>Menu</button>
+            <h1><%= libraryName %><h1>
+            <button>Sections</button>
+            <button>Browse</button> 
+        </header>
+        <main>
+            <div id="dashboard_sections">
+                <% sections.forEach((sec) => { %>
+                       <div class="library_section">
+                           <h2><%= sec.section_name %></h2>
+                       </div>   
+                <% }); %> 
+            </div> 
+            <div id="dashboard_browse">
+                <% documents.forEach((doc) => { %>
+                    <div class="document_listview">
+                        <div class="document_listview_cover"></div>
+                        <div class="document_listview_info">
+                            <h2><%= doc.title %></h2> 
+                            <h3>by <%= doc.author%></h3>
+                        </div>
+                        <div class="document_listview_tags">
+                            <% doc.tags.forEach((tag) => { %>
+                                <h6>tag</h6> 
+                            <%}); %> 
+                        </div>
+                        <div class="document_listview_button">
+                            <button data-parentDocument="<%= doc.document_id %>">Read</button>
+                        </div>
+                    </div> 
+                <% }); %>
+            </div> 
+        </main>
+	</body>
+</html>
+

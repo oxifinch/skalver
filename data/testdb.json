@@ -1,0 +1,68 @@
+[
+    {
+        "id": "123",
+        "library_name": "Skalver Knowledge Repository",
+        "library_description": "The central archive of all hitherto existing knowledge of Skalver.",
+        "sections": [
+            {
+                "section_name": "Flora & Fauna",
+                "section_description": "Almost everything you need to know about jellyfish and orchids!",
+                "documents": ["a1"]
+            }
+        ],
+        "documents": [
+            {
+                "document_id": "a1",
+                "title": "Why Flowers Won't Talk To You",
+                "subtitle": null,
+                "description": "The answer might shock you..",
+                "type": "Essay",
+                "author": "Preston Callsworth III",
+                "series": "Collected Works on Underappreciated Organisms",
+                "tags": ["flowers", "sentience", "obliviousness"],
+                "chapters": [
+                    {
+                        "path": "./data/a1/a1_index.md",
+                        "name": "Why Flowers Won't Talk To You: Index",
+                        "tags": ["index", "outline", "foreword"],
+                        "parent_document": "a1",
+                        "last_modified": "20-05-2021, 22:01"
+                    },
+                    {
+                        "path": "./data/a1/a1_01.md",
+                        "name": "The Easy Answers First",
+                        "tags": ["mouthless", "nobrain", "inanimate"],
+                        "parent_document": "a1",
+                        "last_modified": "20-05-2021, 21:33"
+                    }
+                ]
+            },
+            {
+                "document_id": "b45",
+                "title": "Unorthodox Methods of Angering Marsupials",
+                "subtitle": "A Guide to Hollow Victories",
+                "description": "Warning: The activities depicted in this book should not be carried out unless under the supervision of a professional Possum-Wrangler.",
+                "type": "Book",
+                "author": "Bangley McWrangley",
+                "series": null,
+                "tags": ["nonsense", "stunts", "unrealisticideals"],
+                "chapters": [
+                    {
+                        "path": "./data/b45/b45_index.md",
+                        "name": "Unorthodox Methods of Angering Marsupials: Index",
+                        "tags": ["index", "outline", "foreword"],
+                        "parent_document": "b45",
+                        "last_modified": "23-05-2021, 15:01"
+                    },
+                    {
+                        "path": "./data/a1/b45_kangaroos_are_not_your_friends.md",
+                        "name": "Kangaroos Are Not Your Friends",
+                        "tags": ["kangaroos", "legs", "scary"],
+                        "parent_document": "b45",
+                        "last_modified": "23-05-2021, 15:03"
+                    }
+                ]
+            }
+        ]
+    }
+]
