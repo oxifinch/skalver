@@ -35,8 +35,12 @@ function loadDocument(libraryId, documentId, chapterIndex) {
 
     let chapter = parentDocument.chapters[chapterIndex];
     if (chapterIndex > parentDocument.chapters.length || !parentDocument.chapters[chapterIndex]) {
-        chapter = parentDocument.chapters[0];    
+        chapterIndex = 0;
+        chapter = parentDocument.chapters[chapterIndex];    
     }
+    // TODO: Is this the optimal way to get the next/previous document?
+    let nextChapterURL = `/document/${parentDocument.document_id}?chapter=${parseInt(chapterIndex)+1}`;
+    let prevChapterURL = `/document/${parentDocument.document_id}?chapter=${parseInt(chapterIndex)-1}`;
     
     // TODO: This is also the part where the markdown should be parsed and
     // translated into HTML
@@ -51,9 +55,12 @@ function loadDocument(libraryId, documentId, chapterIndex) {
     let htmlOutput = fs.readFileSync(outputPath, {encoding: "utf-8"});
     // TODO: There are also a lot of synchronous functions being used here, on
     // top of a lot of reading/writing. This may be a performance issue.
+    console.log(markdownPath);
     return {
         markdown: markdownData,
-        output: htmlOutput
+        output: htmlOutput,
+        next: nextChapterURL,
+        previous: prevChapterURL
     };
 }
 
