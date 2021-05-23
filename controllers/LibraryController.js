@@ -5,17 +5,21 @@ function getAll(req, res) {
     res.status(200).json(LibraryModel.loadAll()); 
 }
 
-function getDocument(req, res) {
-    let lib = req.query.library;
-    let doc = req.query.doc;
-    res.send(LibraryModel.loadDocument(lib, doc));
+// Fetch and display the user's active library 
+function getActiveLibrary(req, res) {
+    // TODO: Look up the user's actual active library and use it to query the
+    // database instead of hardcoding it here.
+    let activeLibraryId = "123";
+    let library = LibraryModel.loadLibrary(activeLibraryId);
+    if (!library) {
+        res.status(404).json({message: "Library not found."});
+    } else {
+        res.render("index", {
+            libraryName: library.library_name,
+            sections: library.sections,
+            documents: library.documents,
+        });
+    }
 }
 
-function getChapter(req, res) {
-    let lib = req.query.library;
-    let doc = req.query.doc;
-    let chapter = req.query.chapter;
-    res.send(LibraryModel.loadChapter(lib, doc, chapter));
-}
-
-export default {getAll, getDocument, getChapter};
+export default {getAll, getActiveLibrary};
