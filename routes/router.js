@@ -7,6 +7,6 @@ router
     .get("/dashboard", (req, res) => {
         LibraryController.getActiveLibrary(req, res);
     })
-    .get("/document/:doc", LibraryController.getChapter);
+    .get("/document/:doc", LibraryController.getDocument);
 
 export default {routes: router};

@@ -21,16 +21,16 @@ function getActiveLibrary(_req, res) {
     }
 }
 
-function getChapter(req, res) {
+function getDocument(req, res) {
     // TODO: Look up the user's actual active library and use it to query the
     // database instead of hardcoding it here.
     let activeLibraryId = "123";
     let doc = req.params.doc;
-    let chapter = 0;
-    let documentData = LibraryModel.loadDocumentChapter(activeLibraryId, doc, chapter);
+    let chapter = req.query.chapter;
+    let documentData = LibraryModel.loadDocument(activeLibraryId, doc, chapter);
     res.render("reading", {
-        doc: documentData
+        doc: documentData,
     });
 }
 
-export default {getAll, getActiveLibrary, getChapter};
+export default {getAll, getActiveLibrary, getDocument};
