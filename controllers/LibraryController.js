@@ -33,4 +33,12 @@ function getDocument(req, res) {
     });
 }
 
-export default {getAll, getActiveLibrary, getDocument};
+async function updateDocumentChapter(req, res) {
+    // Save the document and reload
+    let documentId = req.params.doc;
+    let chapter = req.query.chapter;
+    await LibraryModel.editDocumentChapter("123", documentId, chapter, req.body.textContent);
+    res.json({message: "Chapter updated!"});
+}
+
+export default {getAll, getActiveLibrary, getDocument, updateDocumentChapter};

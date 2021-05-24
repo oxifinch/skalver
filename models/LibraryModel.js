@@ -53,8 +53,18 @@ function loadDocument(libraryId, documentId, chapterIndex) {
         markdown: markdownData,
         output: htmlOutput,
         next: nextChapterURL,
-        previous: prevChapterURL
+        previous: prevChapterURL,
     };
 }
 
-export default {loadLibrary, loadDocument};
+async function editDocumentChapter(libraryId, documentId, chapterIndex, textContent) {
+    let library = libraries.find(obj => obj.id === libraryId);
+    let parentDocument = library.documents.find(obj => obj.document_id === documentId);
+    let chapter = parentDocument.chapters[chapterIndex];
+    if(!chapter) {
+        return false;
+    }
+    fs.writeFileSync(path.resolve(chapter.path), textContent.toString(), {encoding: "utf-8"});
+}
+
+export default {loadLibrary, loadDocument, editDocumentChapter};
