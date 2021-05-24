@@ -8,37 +8,16 @@
 	</head>
 
 	<body>
-        <header>
-            <button>Menu</button>
-            <h1><%= libraryName %><h1>
-            <button>Sections</button>
-            <button>Browse</button> 
-        </header>
         <main>
+            <%- include ('partials/dashboard-header.ejs') %>
             <div id="dashboard_sections">
                 <% sections.forEach((sec) => { %>
-                       <div class="library_section">
-                           <h2><%= sec.section_name %></h2>
-                       </div>   
+                <%- include('partials/library-section.ejs', {sec: sec}) %>
                 <% }); %> 
             </div> 
             <div id="dashboard_browse">
                 <% documents.forEach((doc) => { %>
-                    <div class="document_listview">
-                        <div class="document_listview_cover"></div>
-                        <div class="document_listview_info">
-                            <h2><%= doc.title %></h2> 
-                            <h3>by <%= doc.author%></h3>
-                        </div>
-                        <div class="document_listview_tags">
-                            <% doc.tags.forEach((tag) => { %>
-                            <h6><%=tag%></h6> 
-                            <%}); %> 
-                        </div>
-                        <div class="document_listview_button">
-                            <a href="document/<%= doc.document_id %>">Read</a>
-                        </div>
-                    </div> 
+                    <%- include("partials/browse-listitem.ejs", {doc: doc})%>
                 <% }); %>
             </div> 
         </main>

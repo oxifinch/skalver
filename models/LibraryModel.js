@@ -42,21 +42,14 @@ function loadDocument(libraryId, documentId, chapterIndex) {
     let nextChapterURL = `/document/${parentDocument.document_id}?chapter=${parseInt(chapterIndex)+1}`;
     let prevChapterURL = `/document/${parentDocument.document_id}?chapter=${parseInt(chapterIndex)-1}`;
     
-    // TODO: This is also the part where the markdown should be parsed and
-    // translated into HTML
     let markdownPath = path.resolve(chapter.path);
     let markdownData = fs.readFileSync(markdownPath, {encoding: "utf-8"});
-    // TODO: I need to figure out how to save the output instead of writing an
-    // actual HTML file. Seems a bit excessive and unoptimized. This solution is
-    // super janky and fixing it should be a priority.
-    let chapterFolder = path.dirname(path.resolve(chapter.path));
-    let outputPath = `${chapterFolder}/output.html`;
-    execSync(`./mdparser ${markdownPath} ${outputPath}`);
-    let htmlOutput = fs.readFileSync(outputPath, {encoding: "utf-8"});
+    let htlmString = execSync(`./mdparser ${markdownPath}`, {encoding: "utf-8"});
+    let htmlOutput = htlmString;
     // TODO: There are also a lot of synchronous functions being used here, on
     // top of a lot of reading/writing. This may be a performance issue.
-    console.log(markdownPath);
     return {
+        title: parentDocument.title,
         markdown: markdownData,
         output: htmlOutput,
         next: nextChapterURL,
