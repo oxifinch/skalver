@@ -1,0 +1,15 @@
+<div class="document_listview">
+    <div class="document_listview_cover"></div>
+    <div class="document_listview_info">
+        <h2><%= doc.title %></h2> 
+        <h3>by <%= doc.author%></h3>
+    </div>
+    <div class="document_listview_tags">
+        <% doc.tags.forEach((tag) => { %>
+            <h6><%=tag%></h6> 
+        <%}); %> 
+    </div>
+    <div class="document_listview_button">
+        <a href="document/<%= doc.document_id %>">Read</a>
+    </div>
+</div> 
