@@ -29,5 +29,6 @@ function saveMarkdown() {
         }
     })
     .then(response => response.json())
-    .then(data => console.log(data));
+    .then(json => console.log(json))
+    .catch(err => console.log(err));
 }

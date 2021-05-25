@@ -46,7 +46,14 @@ async function updateDocumentChapter(req, res) {
     let chapter = req.query.chapter;
     try {
         await LibraryModel.editDocumentChapter("123", documentId, chapter, req.body.textContent);
-        res.json({message: "Chapter updated!"});
+        try {
+            res.status(201).json({message: "Document successfully updated!"});
+        } catch {
+            res.status(404).render("pages/error", {
+                message: "There was an error reloading the document. Please try again.",
+                status: "404 - Resource not found."
+            });
+        }
     } catch {
         res.status(404).render("pages/error", {
             message: "Sorry, there was an error saving your changes.",

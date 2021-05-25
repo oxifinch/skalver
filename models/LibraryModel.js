@@ -42,6 +42,8 @@ function loadDocumentChapter(libraryId, documentId, chapterIndex) {
     
     let markdownPath = path.resolve(chapter.path);
     let markdownData = fs.readFileSync(markdownPath, {encoding: "utf-8"});
+    // TODO: In order to integrate mdparser with mongodb, I would have to make
+    // it possible to read the entire markdown multi-line string as an argument.
     let htlmString = execSync(`./mdparser ${markdownPath}`, {encoding: "utf-8"});
     return {
         id: parentDocument.document_id,
