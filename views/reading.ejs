@@ -5,6 +5,14 @@
         <title><%= doc.title %> | Skalver</title>
 		<meta name="description" content="Dashboard of Skalver web app"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <style>
+            .hidden {
+                display: none;
+            }
+            #reader_page_markdown {
+                white-space: pre-wrap;
+            }
+        </style>
 	</head>
 
 	<body>
@@ -12,13 +20,29 @@
             <button><a href="/dashboard">Go Back</a></button>
         </header>
         <main>
-            <div class="reader_page" style="width: 60rem; margin: auto; border:
-                2px solid black; padding: 1rem;">
-                <%- doc.output %>
+            <button id="reader_edit">Edit</button>
+            <button id="reader_save">Save Changes</button>
+            <div id="reader_page" style="width: 60rem; margin: auto; border: 2px solid black; padding: 1rem;">
+                <div id="reader_page_content">
+                    <%- doc.output %>
+                </div>
+                <div id="reader_page_markdown" class="hidden">
+                    <!-- ><pre contenteditable="true">
+                        <%- doc.markdown %>
+                    </pre> -->
+                    <textarea id="reader_editor_textarea" cols="80" rows="40" style="resize: none">
+
+                    </textarea>
+                </div>
             </div>
+            
             <a href="<%= doc.previous %>">Prev</a>
             <a href="<%= doc.next%>">Next</a>
         </main>
+        <script>
+            let activeDocumentChapter = <%- JSON.stringify(doc) %>
+        </script>
+        <script src="/js/app.js"></script>
 	</body>
 </html>
 

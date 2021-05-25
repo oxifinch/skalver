@@ -21,16 +21,38 @@ function getActiveLibrary(_req, res) {
     }
 }
 
-function getDocument(req, res) {
+function getDocumentChapter(req, res) {
     // TODO: Look up the user's actual active library and use it to query the
     // database instead of hardcoding it here.
     let activeLibraryId = "123";
-    let doc = req.params.doc;
-    let chapter = req.query.chapter;
-    let documentData = LibraryModel.loadDocument(activeLibraryId, doc, chapter);
-    res.render("reading", {
-        doc: documentData,
-    });
+    let docQuery = req.params.doc;
+    let chapterQuery = req.query.chapter;
+    try {
+        let documentData = LibraryModel.loadDocumentChapter(activeLibraryId, docQuery, chapterQuery);
+        res.status(200).render("reading", {
+            doc: documentData,
+        });
+    } catch {
+        res.status(404).render("pages/error", {
+            message: "Sorry, the resource you requested could not be located.",
+            status: "404 - Resource not found."
+        });
+    }
 }
 
-export default {getAll, getActiveLibrary, getDocument};
+async function updateDocumentChapter(req, res) {
+    // Save the document and reload
+    let documentId = req.params.doc;
+    let chapter = req.query.chapter;
+    try {
+        await LibraryModel.editDocumentChapter("123", documentId, chapter, req.body.textContent);
+        res.json({message: "Chapter updated!"});
+    } catch {
+        res.status(404).render("pages/error", {
+            message: "Sorry, there was an error saving your changes.",
+            status: "404 - Could not save resource."
+        });
+    }
+}
+
+export default {getAll, getActiveLibrary, getDocumentChapter, updateDocumentChapter};

@@ -7,10 +7,11 @@ const libraries = JSON.parse(fs.readFileSync(path.resolve("./data/testdb.json"))
 // TODO: All of this is just for quick prototyping - need to implement actual
 // MongoDB database with mongoose!
 function loadLibrary(id) {
+    // TODO: Look among the user's libraries, or the libraries they have access
+    // to. By default, the user's active library should be loaded.
     const library = libraries.find(obj => obj.id === id); 
     if(!library) {
-        // TODO: Add proper error handling
-        return false;
+        throw "Requested library could not be found.";
     } else {
         return library;
     }
@@ -19,18 +20,15 @@ function loadLibrary(id) {
 // TODO: This will only be used for the active library, so maybe the user's
 // active library should be read from within the function instead of being
 // supplied as an argument?
-function loadDocument(libraryId, documentId, chapterIndex) {
+function loadDocumentChapter(libraryId, documentId, chapterIndex) {
     const library = libraries.find(obj => obj.id === libraryId); 
     if(!library) {
-        // TODO: Add proper error handling
-        console.log("Could not find library");
-        return false;
+        throw "Requested library could not be found.";
     }
 
     let parentDocument = library.documents.find(obj => obj.document_id === documentId);
     if (!parentDocument) {
-        console.log(`Could not find document with ID '${documentId}'`);
-        return false;
+        throw "Requested document could not be found.";
     }
 
     let chapter = parentDocument.chapters[chapterIndex];
@@ -45,16 +43,30 @@ function loadDocument(libraryId, documentId, chapterIndex) {
     let markdownPath = path.resolve(chapter.path);
     let markdownData = fs.readFileSync(markdownPath, {encoding: "utf-8"});
     let htlmString = execSync(`./mdparser ${markdownPath}`, {encoding: "utf-8"});
-    let htmlOutput = htlmString;
-    // TODO: There are also a lot of synchronous functions being used here, on
-    // top of a lot of reading/writing. This may be a performance issue.
     return {
+        id: parentDocument.document_id,
         title: parentDocument.title,
+        subtitle: parentDocument.subtitle,
+        author: parentDocument.author,
         markdown: markdownData,
-        output: htmlOutput,
+        output: htlmString,
+        chapterNumber: parseInt(chapterIndex),
         next: nextChapterURL,
-        previous: prevChapterURL
+        previous: prevChapterURL,
     };
 }
 
-export default {loadLibrary, loadDocument};
+async function editDocumentChapter(libraryId, documentId, chapterIndex, textContent) {
+    let library = libraries.find(obj => obj.id === libraryId);
+    let parentDocument = library.documents.find(obj => obj.document_id === documentId);
+    if(!parentDocument) {
+        throw "ERROR: The parent document could not be located.";
+    }
+    let chapter = parentDocument.chapters[chapterIndex];
+    if(!chapter) {
+        throw "ERROR: The requested chapter could not be located.";
+    }
+    fs.writeFileSync(path.resolve(chapter.path), textContent.toString(), {encoding: "utf-8"});
+}
+
+export default {loadLibrary, loadDocumentChapter, editDocumentChapter};
