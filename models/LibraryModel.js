@@ -44,11 +44,13 @@ function loadDocumentChapter(libraryId, documentId, chapterIndex) {
     let markdownData = fs.readFileSync(markdownPath, {encoding: "utf-8"});
     let htlmString = execSync(`./mdparser ${markdownPath}`, {encoding: "utf-8"});
     return {
+        id: parentDocument.document_id,
         title: parentDocument.title,
         subtitle: parentDocument.subtitle,
         author: parentDocument.author,
         markdown: markdownData,
         output: htlmString,
+        chapterNumber: parseInt(chapterIndex),
         next: nextChapterURL,
         previous: prevChapterURL,
     };
@@ -57,9 +59,12 @@ function loadDocumentChapter(libraryId, documentId, chapterIndex) {
 async function editDocumentChapter(libraryId, documentId, chapterIndex, textContent) {
     let library = libraries.find(obj => obj.id === libraryId);
     let parentDocument = library.documents.find(obj => obj.document_id === documentId);
+    if(!parentDocument) {
+        throw "ERROR: The parent document could not be located.";
+    }
     let chapter = parentDocument.chapters[chapterIndex];
     if(!chapter) {
-        return false;
+        throw "ERROR: The requested chapter could not be located.";
     }
     fs.writeFileSync(path.resolve(chapter.path), textContent.toString(), {encoding: "utf-8"});
 }

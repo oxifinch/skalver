@@ -34,7 +34,8 @@ function getDocumentChapter(req, res) {
         });
     } catch {
         res.status(404).render("pages/error", {
-            message: "Sorry, the resource you requested could not be located."
+            message: "Sorry, the resource you requested could not be located.",
+            status: "404 - Resource not found."
         });
     }
 }
@@ -43,8 +44,15 @@ async function updateDocumentChapter(req, res) {
     // Save the document and reload
     let documentId = req.params.doc;
     let chapter = req.query.chapter;
-    await LibraryModel.editDocumentChapter("123", documentId, chapter, req.body.textContent);
-    res.json({message: "Chapter updated!"});
+    try {
+        await LibraryModel.editDocumentChapter("123", documentId, chapter, req.body.textContent);
+        res.json({message: "Chapter updated!"});
+    } catch {
+        res.status(404).render("pages/error", {
+            message: "Sorry, there was an error saving your changes.",
+            status: "404 - Could not save resource."
+        });
+    }
 }
 
 export default {getAll, getActiveLibrary, getDocumentChapter, updateDocumentChapter};
