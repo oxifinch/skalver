@@ -31,6 +31,7 @@
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "mongoose": "^5.12.10"
+    "mongoose": "^5.12.11",
+    "skalver-mdparser": "^0.1.0"
   }
 }

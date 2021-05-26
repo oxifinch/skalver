@@ -1,9 +1,14 @@
 import express from "express";
 import router from "./routes/router.js";
+import dotenv from "dotenv";
 
+dotenv.config();
+const {
+    PORT,
+    DB_CONNECTION_STRING,
+    NODE_ENV,
+} = process.env;
 const app = express();
-// TODO: Use .env instead?
-const PORT = 3000;
 
 app.set("view engine", "ejs");
 app.use(express.json());

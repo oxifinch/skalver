@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import mdparser from "mdparser/mdparser.js";
+import mdparser from "skalver-mdparser";
 
 const libraries = JSON.parse(fs.readFileSync(path.resolve("./data/testdb.json")));
 
