@@ -4,6 +4,11 @@
         <h2><%= book.title %></h2> 
         <h3>by <%= book.author %></h3>
     </div>
+    <div class="book_listview_tags">
+        <% book.tags.forEach((tag) => { %>
+        <p class="book_tag"><%= tag %></p>
+        <% }); %>
+    </div>
     <div class="book_listview_link">
         <a href="read/<%= book.id %>">Read</a>
     </div>

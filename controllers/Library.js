@@ -18,17 +18,17 @@ async function getActiveLibrary(_req, res) {
         .populate({
             path: "books",
             select: {
-                title: 1,
-                author: 1,
-                series: 1,
-                tags: 3
+                title: true,
+                author: true,
+                series: true,
+                tags: true
             }
         })
         .exec();
     if (!library) {
         res.status(404).json({message: "Library not found."});
     } else {
-        console.log(library.books[0]);
+        console.log(library.books[0].tags);
         res.status(200).render("index", {
             library: library
         });

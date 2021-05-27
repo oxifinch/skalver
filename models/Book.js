@@ -15,13 +15,13 @@ const bookSchema = new mongoose.Schema({
     },
     author: {
         type: String,
-        maxLength: 30,
+        maxLength: 40,
         required: true
     },
     coauthors: [
         {
             type: String,
-            maxLength: 30,
+            maxLength: 40,
             required: false
         }
     ],
@@ -30,7 +30,15 @@ const bookSchema = new mongoose.Schema({
         minLength: 3,
         maxLength: 30,
         required: false
-    }
+    },
+    tags: [
+        {
+            type: String, 
+            minLength: 2,
+            maxLength: 30,
+            required: false,
+        }
+    ]
 });
 
 export default mongoose.model("book", bookSchema);
