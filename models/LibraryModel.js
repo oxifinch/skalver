@@ -1,8 +1,24 @@
 import fs from "fs";
 import path from "path";
 import mdparser from "skalver-mdparser";
+import mongoose from "mongoose";
 
 const libraries = JSON.parse(fs.readFileSync(path.resolve("./data/testdb.json")));
+
+const librarySchema = new mongoose.Schema({
+    name: {
+        type: String,
+        minLength: 2,
+        maxLength: 40,
+        required: true
+    },
+    description: {
+        type: String,
+        maxLength: 5000,
+        required: true
+    },
+    sections: []
+})
 
 // TODO: All of this is just for quick prototyping - need to implement actual
 // MongoDB database with mongoose!
