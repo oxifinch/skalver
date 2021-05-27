@@ -13,11 +13,24 @@ const bookSchema = new mongoose.Schema({
         maxLength: 40,
         required: false
     },
-    authors: [
+    author: {
+        type: String,
+        maxLength: 30,
+        required: true
+    },
+    coauthors: [
         {
             type: String,
+            maxLength: 30,
+            required: false
         }
-    ]
+    ],
+    type: {
+        type: String,
+        minLength: 3,
+        maxLength: 30,
+        required: false
+    }
 });
 
 export default mongoose.model("book", bookSchema);

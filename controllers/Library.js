@@ -1,4 +1,6 @@
 import LibraryModel from "../models/Library.js";
+import Section from "../models/Section.js";
+import Book from "../models/Book.js";
 
 // Fetch and display the user's active library 
 async function getActiveLibrary(_req, res) {
@@ -6,14 +8,28 @@ async function getActiveLibrary(_req, res) {
     // database instead of hardcoding it here.
     let searchTerm = "Skalver Test Library";
     let library = await LibraryModel.findOne({name: searchTerm})
-        .populate({path: "section"})
+        .populate({
+            path: "sections",
+            populate: {
+                path: "books",
+                select: {title: 1}
+            }
+        })
+        .populate({
+            path: "books",
+            select: {
+                title: 1,
+                author: 1,
+                series: 1,
+                tags: 3
+            }
+        })
         .exec();
     if (!library) {
         res.status(404).json({message: "Library not found."});
     } else {
-        console.log("User should get a library here");
-        console.log(library);
-        res.render("index", {
+        console.log(library.books[0]);
+        res.status(200).render("index", {
             library: library
         });
     }

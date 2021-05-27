@@ -18,10 +18,10 @@ mongoose.connect(DB_CONNECTION_STRING, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
 })
-    .then(() => console.log("Connected to DB."))
-    .catch(() => console.log("ERROR: Failed to connect to DB."));
+    .then(() => console.log("[ INFO ] Connected to DB."))
+    .catch(() => console.log("[ ERROR ] Failed to connect to DB."));
 
 
 app.listen(PORT, () => {
-    console.log(`Skalver server listening on Port ${PORT}..`);
+    console.log(`[ INFO ] Skalver server listening on Port ${PORT}..`);
 });

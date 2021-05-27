@@ -13,7 +13,10 @@ const librarySchema = new mongoose.Schema({
         required: true
     },
     sections: [
-        {type: mongoose.Types.ObjectId, ref: "sections"}
+        {type: mongoose.Types.ObjectId, ref: "section"}
+    ],
+    books: [
+        {type: mongoose.Types.ObjectId, ref: "book"}
     ]
 });
 
