@@ -1,15 +1,15 @@
 <div class="document_listview">
     <div class="document_listview_cover"></div>
     <div class="document_listview_info">
-        <h2><%= doc.title %></h2> 
-        <h3>by <%= doc.author%></h3>
+        <h2><%= book.title %></h2> 
+        <h3>by <%= book.author%></h3>
     </div>
     <div class="document_listview_tags">
-        <% doc.tags.forEach((tag) => { %>
+        <% book.tags.forEach((tag) => { %>
             <h6><%=tag%></h6> 
         <%}); %> 
     </div>
     <div class="document_listview_button">
-        <a href="document/<%= doc.document_id %>">Read</a>
+        <a href="document/<%= book.id %>">Read</a>
     </div>
 </div> 

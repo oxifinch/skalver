@@ -10,17 +10,13 @@
 	<body>
         <main>
             <%- include ('partials/dashboard-header.ejs') %>
-
             <div id="dashboard_sections">
-                <% sections.forEach((sec) => { %>
+                <% library.sections.forEach((sec) => { %>
                 <%- include('partials/library-section.ejs', {sec: sec}) %>
                 <% }); %> 
             </div> 
 
             <div id="dashboard_browse">
-                <% documents.forEach((doc) => { %>
-                    <%- include("partials/browse-listitem.ejs", {doc: doc})%>
-                <% }); %>
             </div> 
 
         </main>

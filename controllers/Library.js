@@ -1,22 +1,20 @@
-import LibraryModel from "../models/LibraryModel.js";
-
-function getAll(_req, res) {
-    res.status(200).json(LibraryModel.loadAll()); 
-}
+import LibraryModel from "../models/Library.js";
 
 // Fetch and display the user's active library 
-function getActiveLibrary(_req, res) {
+async function getActiveLibrary(_req, res) {
     // TODO: Look up the user's actual active library and use it to query the
     // database instead of hardcoding it here.
-    let activeLibraryId = "123";
-    let library = LibraryModel.loadLibrary(activeLibraryId);
+    let searchTerm = "Skalver Test Library";
+    let library = await LibraryModel.findOne({name: searchTerm})
+        .populate({path: "section"})
+        .exec();
     if (!library) {
         res.status(404).json({message: "Library not found."});
     } else {
+        console.log("User should get a library here");
+        console.log(library);
         res.render("index", {
-            libraryName: library.library_name,
-            sections: library.sections,
-            documents: library.documents,
+            library: library
         });
     }
 }
@@ -62,4 +60,4 @@ async function updateDocumentChapter(req, res) {
     }
 }
 
-export default {getAll, getActiveLibrary, getDocumentChapter, updateDocumentChapter};
+export default {getActiveLibrary, getDocumentChapter, updateDocumentChapter};
