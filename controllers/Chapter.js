@@ -3,10 +3,8 @@ import Chapter from "../models/Chapter.js";
 import mdparser from "skalver-mdparser";
 
 async function getChapter(req, res) {
-    // TODO: Look up the user's actual active library and use it to query the
-    // database instead of hardcoding it here.
     let bookQuery = req.params.bookId;
-    let chapterQuery = req.query.chapter;
+    let chapterQuery = parseInt(req.query.chapter);
     if(!chapterQuery) {
         chapterQuery = 0;
     }
@@ -24,6 +22,15 @@ async function getChapter(req, res) {
             // wasn't found and user is redirected to book index
             chapterId = bookData.chapters[0];
         }
+        let chapterNumber;
+        for(let i = 0; i < bookData.chapters.length; i++) {
+            if(bookData.chapters[i] === chapterId) {
+                chapterNumber = i;
+                break;
+            }
+        }
+        let nextQuery = chapterNumber + 1;
+        let prevQuery = chapterNumber < 1 ? 0 : chapterNumber - 1;
         try {
             let chapterData = await Chapter.findById(chapterId);
             let htmlOutput = mdparser.parse_markdown(chapterData.markdown);
@@ -31,6 +38,9 @@ async function getChapter(req, res) {
                 book: bookData,
                 chapter: chapterData,
                 htmlOutput: htmlOutput,
+                chapterNumber: chapterNumber,
+                nextChapter: `/read/${bookData.id}?chapter=${nextQuery}`,
+                prevChapter: `/read/${bookData.id}?chapter=${prevQuery}`,
             });
 
         } catch {

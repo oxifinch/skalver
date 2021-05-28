@@ -18,7 +18,7 @@
 	<body>
         <header>
             <button><a href="/dashboard">Go Back</a></button>
-            <p><%= book.title %> by <%= book.author %> | 00: <%= chapter.name %></p>
+            <p><%= book.title %> by <%= book.author %> | <%= chapterNumber %>: <%= chapter.name %></p>
         </header>
         <main>
             <button id="reader_edit">Edit</button>
@@ -32,8 +32,9 @@
                     </textarea>
                 </div>
             </div>
-            
         </main>
+        <a href="<%= prevChapter %>">Prev</a>
+        <a href="<%= nextChapter %>">Next</a>
         <script>
             let activeChapter = <%- JSON.stringify(chapter) %>
         </script>
