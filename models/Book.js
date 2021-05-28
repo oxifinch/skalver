@@ -31,6 +31,9 @@ const bookSchema = new mongoose.Schema({
         maxLength: 30,
         required: false
     },
+    chapters: [
+        {type: mongoose.Types.ObjectId, ref: "chapter"}
+    ],
     tags: [
         {
             type: String, 
