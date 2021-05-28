@@ -2,7 +2,7 @@ const pageContainer = document.querySelector("#reader_page");
 const pageContent = document.querySelector("#reader_page_content");
 const pageMarkdown = document.querySelector("#reader_page_markdown");
 const editorArea = document.querySelector("#reader_editor_textarea");
-editorArea.value = activeDocumentChapter.markdown;
+editorArea.value = activeChapter.markdown;
 const saveButton = document.querySelector("#reader_save");
 saveButton.addEventListener("click", () => {
     saveMarkdown();
@@ -18,17 +18,18 @@ function toggleEditor() {
 }
 
 function saveMarkdown() {
-    fetch(`/document/${activeDocumentChapter.id}?chapter=${activeDocumentChapter.chapterNumber}`, {
+    let newMarkdown = editorArea.value.toString();
+    fetch(`/chapter/${activeChapter._id}`, {
         method: "POST",
-        body: JSON.stringify({ 
-            textContent: editorArea.value
+        body: JSON.stringify({
+            markdown: newMarkdown
         }),
         encoding: "utf-8",
         headers: {
             "Content-Type": "application/json"
         }
     })
-    .then(response => response.json())
+    .then(res => res.json())
     .then(json => console.log(json))
     .catch(err => console.log(err));
 }

@@ -1,13 +1,15 @@
 import express from "express";
-import LibraryController from "../controllers/LibraryController.js";
+import LibraryController from "../controllers/Library.js";
+//import BookController from "../controllers/Book.js";
+import ChapterController from "../controllers/Chapter.js";
 
 const router = express.Router();
 
 router
-    .get("/dashboard", (req, res) => {
-        LibraryController.getActiveLibrary(req, res);
-    })
-    .get("/document/:doc", LibraryController.getDocumentChapter)
-    .post("/document/:doc", LibraryController.updateDocumentChapter);
+    .get("/dashboard", LibraryController.getActiveLibrary)
+    .get("/read/:bookId", ChapterController.readChapter)
+    
+    .post("/chapter/:chapterId", ChapterController.updateChapter);
+    //.get("/read/:bookId", BookController.getBookInfo);
 
 export default {routes: router};
