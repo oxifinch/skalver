@@ -18,17 +18,18 @@ function toggleEditor() {
 }
 
 function saveMarkdown() {
-    fetch(`/document/${activeChapter.id}?chapter=${activeChapter.chapterNumber}`, {
+    let newMarkdown = editorArea.value.toString();
+    fetch(`/chapter/${activeChapter._id}`, {
         method: "POST",
-        body: JSON.stringify({ 
-            textContent: editorArea.value
+        body: JSON.stringify({
+            markdown: newMarkdown
         }),
         encoding: "utf-8",
         headers: {
             "Content-Type": "application/json"
         }
     })
-    .then(response => response.json())
+    .then(res => res.json())
     .then(json => console.log(json))
     .catch(err => console.log(err));
 }

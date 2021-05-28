@@ -7,7 +7,9 @@ const router = express.Router();
 
 router
     .get("/dashboard", LibraryController.getActiveLibrary)
-    .get("/read/:bookId", ChapterController.getChapter);
+    .get("/read/:bookId", ChapterController.readChapter)
+    
+    .post("/chapter/:chapterId", ChapterController.updateChapter);
     //.get("/read/:bookId", BookController.getBookInfo);
 
 export default {routes: router};

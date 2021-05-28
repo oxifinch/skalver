@@ -2,7 +2,7 @@ import Book from "../models/Book.js";
 import Chapter from "../models/Chapter.js";
 import mdparser from "skalver-mdparser";
 
-async function getChapter(req, res) {
+async function readChapter(req, res) {
     let bookQuery = req.params.bookId;
     let chapterQuery = parseInt(req.query.chapter);
     if(!chapterQuery) {
@@ -57,4 +57,31 @@ async function getChapter(req, res) {
     }
 }
 
-export default {getChapter};
+async function updateChapter(req, res) {
+    let chapter = await Chapter.findById(req.params.chapterId);
+    if(!chapter) {
+        res.status(404).render("pages/error", {
+            message: "Sorry, the chapter could not be updated.",
+            status: "404 - Resource not found."
+        });
+    }
+    let newMarkdown = req.body.markdown;
+    if(!newMarkdown) {
+        res.status(404).render("pages/error", {
+            message: "Sorry, the new text content could not be transmitted.",
+            status: "404 - New text data not found."
+        });
+    }
+    chapter.markdown = newMarkdown.toString();
+    let savedChapter = await chapter.save();
+    if(!savedChapter) {
+        res.status(500).render("pages/error", {
+            message: "The changes to the chapter failed to save.",
+            status: "500 - Server could not save changes."
+        });
+
+    }
+    res.status(200).json(savedChapter);
+}
+
+export default {readChapter, updateChapter};
