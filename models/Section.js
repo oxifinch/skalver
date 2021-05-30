@@ -15,6 +15,6 @@ const sectionSchema = new mongoose.Schema({
     books: [
         {type: mongoose.Types.ObjectId, ref: "book"}
     ]
-});
+}, {collection: "sections"});
 
 export default mongoose.model("section", sectionSchema);

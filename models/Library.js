@@ -18,7 +18,7 @@ const librarySchema = new mongoose.Schema({
     books: [
         {type: mongoose.Types.ObjectId, ref: "book"}
     ]
-});
+}, {collection: "libraries"});
 
 export default mongoose.model("library", librarySchema);
 

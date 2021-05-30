@@ -27,7 +27,8 @@ router
     // Main app routes
     .get("/dashboard", LibraryController.getActiveLibrary)
     .get("/read/:bookId", ChapterController.readChapter)
-    .post("/chapter/:chapterId", ChapterController.updateChapter)
+    .post("/chapter/update/:chapterId", ChapterController.updateChapter)
+    .post("/chapter/create/:bookId", ChapterController.createChapter)
 
     // Authentication/login
     .get("/login", (req, res) => {

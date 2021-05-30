@@ -41,7 +41,7 @@ const bookSchema = new mongoose.Schema({
             maxLength: 30,
             required: false,
         }
-    ]
-});
+    ],
+}, {collection: "books"});
 
 export default mongoose.model("book", bookSchema);

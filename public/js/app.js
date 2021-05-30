@@ -19,7 +19,7 @@ function toggleEditor() {
 
 function saveMarkdown() {
     let newMarkdown = editorArea.value.toString();
-    fetch(`/chapter/${activeChapter._id}`, {
+    fetch(`/chapter/update/${activeChapter._id}`, {
         method: "POST",
         body: JSON.stringify({
             markdown: newMarkdown
