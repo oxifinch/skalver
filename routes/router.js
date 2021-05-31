@@ -2,6 +2,7 @@ import express from "express";
 import LibraryController from "../controllers/Library.js";
 //import BookController from "../controllers/Book.js";
 import ChapterController from "../controllers/Chapter.js";
+import UserController from "../controllers/User.js";
 
 const router = express.Router();
 
@@ -34,19 +35,10 @@ router
     .get("/login", (req, res) => {
         res.render("pages/login"); 
     })
-    .post("/login", (req, res) => {
-        console.log(req.body);
-        // UserModel: check database for password and username match
-        req.session.userName = "joseph"
-        req.session.userId = "abc123";
-        console.log(req.session);
-        res.send("LOGIN POST ROUTE");
-    })
+    .post("/login", UserController.loginUser)
     .get("/register", (req, res) => {
         res.render("pages/register");
     })
-    .post("/register", (req, res) => {
-        res.send("REGISTER POST ROUTE");
-    })
+    .post("/register", UserController.createUser)
 
 export default {routes: router};

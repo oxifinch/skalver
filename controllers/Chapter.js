@@ -85,7 +85,6 @@ async function updateChapter(req, res) {
                 status: "500 - Internal server error."
             });
         });
-    res.status(200).json(savedChapter);
 }
 
 async function createChapter(req, res) {
