@@ -1,3 +1,4 @@
+const newChapterWindow = document.querySelector("#new_chapter_window");
 const pageContainer = document.querySelector("#reader_page");
 const pageContent = document.querySelector("#reader_page_content");
 const pageMarkdown = document.querySelector("#reader_page_markdown");
@@ -11,10 +12,18 @@ const editButton = document.querySelector("#reader_edit");
 editButton.addEventListener("click", () => {
     toggleEditor();
 });
+const createNewButton = document.querySelector("new_chapter_button");
+createNewButton.addEventListener("click", () => {
+    toggleNewWindow();
+})
 
 function toggleEditor() {
     pageContent.classList.toggle("hidden"); 
     pageMarkdown.classList.toggle("hidden"); 
+}
+
+function toggleNewWindow() {
+    newChapterWindow.classList.toggle("hidden");
 }
 
 function saveMarkdown() {
@@ -32,4 +41,10 @@ function saveMarkdown() {
     .then(res => res.json())
     .then(json => console.log(json))
     .catch(err => console.log(err));
+}
+
+function createNewChapter() {
+    // fetch POST to create a new chapter on parent book ID
+
+
 }

@@ -20,6 +20,16 @@
             <button><a href="/dashboard">Go Back</a></button>
             <p><%= book.title %> by <%= book.author %> | <%= chapterNumber %>: <%= chapter.name %></p>
         </header>
+        <div id="new_chapter_window" class="hidden">
+            <h2>Create New Chapter</h2> 
+            <form action="/chapter/create/<%=book.id%>" method="POST">
+                <h4>Name</h4>
+                <input type="text" name="name" id="editor_new_name">
+                <textarea name="markdown" id="editor_new_markdown" cols="60" rows="20"></textarea>
+                <button type="submit">Create</button>
+            </form>
+        </div>
+        <button id="new_chapter_button">Create New Chapter</button>
         <main>
             <button id="reader_edit">Edit</button>
             <button id="reader_save">Save Changes</button>
@@ -37,6 +47,7 @@
         <a href="<%= nextChapter %>">Next</a>
         <script>
             let activeChapter = <%- JSON.stringify(chapter) %>
+            let parentBook = <%- JSON.stringify(book) %>
         </script>
         <script src="/js/app.js"></script>
 	</body>
