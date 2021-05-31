@@ -20,9 +20,17 @@ async function createUser(req, res, next) {
             activeLibrary: null
         })
         .then((result) => {
-            console.log(result);
+            req.session.userName = result.username;
+            req.session.userId = result.id;
+            res.redirect("/controlpanel/libraries");
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            res.status(500).render("pages/error", {
+                message: "Sorry, the user account could not be created. Please try again later.",
+                status: "500 - Internal server error."
+            });
+        });
     }
 }
 

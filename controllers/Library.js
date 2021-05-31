@@ -8,6 +8,7 @@ async function loadActiveLibrary(req, res) {
         res.redirect("/login");
     }
     const user = await User.findById(req.session.userId);
+    console.log(user);
     if(!user) {
         res.status(404).render("pages/error", {
             message: "You user account could not be located.",
@@ -86,8 +87,53 @@ async function loadLibraryControlPanel(req, res) {
     }
 }
 
+async function createLibrary(req, res) {
+    if(!req.session.userName || !req.session.userId) {
+        res.redirect("/login");
+    }
+    const user = await User.findById(req.session.userId);
+    if(!user) {
+        res.status(404).render("pages/error", {
+            message: "You user account could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    const {name, description} = req.body;
+    if(!name) {
+        name = "Unnamed";
+    }
+    if(!description) {
+        description = "";
+    }
+    Library.create({
+        name: name,
+        description: description,
+        books: []
+    })
+    .then((result) => {
+        console.log(result);
+        user.activeLibrary = result.id;
+        user.save()
+        .then(() => {
+            res.redirect("/dashboard");
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).render("pages/error", {
+                message: "Your active library could not be updated on your account.",
+                status: "500 - Internal server error."
+            });
+        })
+    })
+    .catch((err) => {
+        console.log(err);
+        res.send("Something went wrong");
+    });
+}
+
 export default {
     loadActiveLibrary, 
     loadLibrary, 
-    loadLibraryControlPanel
+    loadLibraryControlPanel,
+    createLibrary
 };

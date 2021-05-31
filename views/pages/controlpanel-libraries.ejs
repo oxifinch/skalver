@@ -4,9 +4,15 @@
 		<meta charset="utf-8" />
 		<title>Skalver | Libraries</title>
 		<meta name="description" content="Library control panel for Skalver web app"/>
-		<meta name="author" content="oxifinch"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="/css/style.css"/>
+        <style>
+            .hidden {
+                display: none;
+            }
+            #reader_page_markdown {
+                white-space: pre-wrap;
+            }
+        </style>
 	</head>
 
 	<body>
@@ -28,6 +34,15 @@
                 <button>Create New Library</button>
             <% } %>
         </div>
+        <div id="form_create_new_library" class="hidden">
+            <form action="/library/create" method="POST">
+                <input type="text" name="name" required> 
+                <textarea name="description" cols="40" rows="20" required></textarea>
+                <button type="submit">Create</button>
+            </form>
+        </div>
+        <button id="button_create_new_library">Create New Library</button>
+        <script src="/js/librarycontrols.js"></script>
 	</body>
 </html>
 

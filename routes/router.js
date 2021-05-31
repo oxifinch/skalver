@@ -32,7 +32,7 @@ router
     .get("/read/:bookId", ChapterController.readChapter)
     .post("/chapter/update/:chapterId", ChapterController.updateChapter)
     .post("/chapter/create/:bookId", ChapterController.createChapter)
-    .post("/library/create", ChapterController.createChapter)
+    .post("/library/create", LibraryController.createLibrary)
 
 
     // Authentication/login
