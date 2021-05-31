@@ -113,6 +113,7 @@ async function createLibrary(req, res) {
     .then((result) => {
         console.log(result);
         user.activeLibrary = result.id;
+        user.libraries.push(result.id);
         user.save()
         .then(() => {
             res.redirect("/dashboard");
