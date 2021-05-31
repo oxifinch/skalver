@@ -73,14 +73,18 @@ async function updateChapter(req, res) {
         });
     }
     chapter.markdown = newMarkdown.toString();
-    let savedChapter = await chapter.save();
-    if(!savedChapter) {
-        res.status(500).render("pages/error", {
-            message: "The changes to the chapter failed to save.",
-            status: "500 - Server could not save changes."
+    chapter.save()
+        .then((result) => {
+            console.log(`[ DEBUG ] ${result}`);
+            res.status(200).json(result);
+        })
+        .catch((err) => {
+            console.log(`[ DEBUG ] ${err}`);
+            res.status(404).render("pages/error", {
+                message: "The chapter could not be saved.",
+                status: "500 - Internal server error."
+            });
         });
-
-    }
     res.status(200).json(savedChapter);
 }
 
@@ -114,17 +118,20 @@ async function createChapter(req, res) {
             markdown,
             tags
         });
-        try {
-            parentBook.chapters.push(newChapter.id);
-            // TODO: Why does this cause an error?
-            await parentBook.save();
-            res.status(200).json(newChapter);
-        } catch {
-            res.status(500).render("pages/error", {
-                message: "The new chapter was created, but could not be added to the book's chapter list.",
-                status: "500 - Internal server error."
-            });
-        }
+        parentBook.chapters.push(newChapter.id);
+        // TODO: Why does this cause an error?
+        parentBook.save()
+            .then((result) => {
+                console.log(`[ DEBUG ] ${result}`);
+                res.redirect(`/read/${parentBook.id}?chapter=${parentBook.length-1}`);
+            })
+            .catch((err) => {
+                console.log(`[ DEBUG ] ${err}`);
+                res.status(500).render("pages/error", {
+                    message: "The new chapter was created, but could not be added to the book's chapter list.",
+                    status: "500 - Internal server error."
+                });
+            })
     } catch {
         res.status(500).render("pages/error", {
             message: "The new chapter could not be created.",
