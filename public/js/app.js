@@ -12,7 +12,7 @@ const editButton = document.querySelector("#reader_edit");
 editButton.addEventListener("click", () => {
     toggleEditor();
 });
-const createNewButton = document.querySelector("new_chapter_button");
+const createNewButton = document.querySelector("#new_chapter_button");
 createNewButton.addEventListener("click", () => {
     toggleNewWindow();
 })

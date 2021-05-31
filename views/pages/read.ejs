@@ -18,10 +18,10 @@
 
 	<body>
         <header>
-            <button class="btn btn-primary text-light"><a href="/dashboard">Go Back</a></button>
+            <a href="/dashboard">Go Back</a>
             <p><%= book.title %> by <%= book.author %> | <%= chapterNumber %>: <%= chapter.name %></p>
         </header>
-        <div id="new_chapter_window" class="hidden">
+        <div id="new_chapter_window" class="hidden ">
             <h2>Create New Chapter</h2> 
             <form action="/chapter/create/<%=book.id%>" method="POST">
                 <h4>Name</h4>
@@ -30,7 +30,7 @@
                 <button type="submit">Create</button>
             </form>
         </div>
-        <button id="new_chapter_button">Create New Chapter</button>
+        <button id="new_chapter_button" class="btn btn-primary">Create New Chapter</button>
         <main>
             <button id="reader_edit">Edit</button>
             <button id="reader_save">Save Changes</button>
