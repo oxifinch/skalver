@@ -10,13 +10,13 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         minLength: 5,
-        maxLength: 40,
+        maxLength: 100,
         required: true
     },
     activeLibrary: {
         type: mongoose.Types.ObjectId,
         ref: "library",
-        required: true
+        required: false
     },
     libraries: [
         {type: mongoose.Types.ObjectId, ref: "library"}

@@ -7,7 +7,23 @@ async function createUser(req, res, next) {
         res.redirect("/register");
     }
     let userExists = await User.exists({username: username});
-    console.log(userExists);
+    if(userExists) {
+        res.redirect("/login");
+        next();
+    } else if (!userExists) {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        User.create({
+            username: username,
+            password: hashedPassword,
+            libraries: [],
+            activeLibrary: null
+        })
+        .then((result) => {
+            console.log(result);
+        })
+        .catch(err => console.log(err));
+    }
 }
 
 async function loginUser(req, res, next) {
@@ -24,10 +40,22 @@ async function loginUser(req, res, next) {
         } else if (passwordMatch) {
             req.session.userName = user.username;
             req.session.userId = user.id;
-            res.redirect("/dashboard")
-            next();
+            if(!user.activeLibrary || user.libraries.length === 0) {
+                res.redirect("/controlpanel/libraries");
+                next();
+            } else {
+                res.redirect("/dashboard");
+                next();
+            }
         }
     }
 }
 
-export default {createUser, loginUser};
+async function logoutUser(req, res, next) {
+    // TODO: Destroy session and return to login page
+}
+
+export default {
+    createUser, 
+    loginUser
+};

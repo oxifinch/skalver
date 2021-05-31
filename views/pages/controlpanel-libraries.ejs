@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Skalver | Libraries</title>
+		<meta name="description" content="Library control panel for Skalver web app"/>
+		<meta name="author" content="oxifinch"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="/css/style.css"/>
+	</head>
+
+	<body>
+        <h1>Your Libraries</h1>
+        <hr>
+        <div>
+            <% if(user.libraries.length > 0) { %> 
+                <% user.libraries.forEach((library) => { %>
+                    <div>
+                        <h3><%= library.name %></h3>
+                        <hr>
+                        <p><%= library.description %></p>
+                        <h4><%= library.books.length %> books</h4>
+                        <a href="/library/<%= library.id %>">Open</a>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <h2>You have no libraries!</h2>
+                <button>Create New Library</button>
+            <% } %>
+        </div>
+	</body>
+</html>
+

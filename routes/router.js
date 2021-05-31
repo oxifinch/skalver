@@ -26,10 +26,14 @@ router
         res.render("pages/homepage");
     })
     // Main app routes
-    .get("/dashboard", LibraryController.getActiveLibrary)
+    .get("/dashboard", LibraryController.loadActiveLibrary)
+    .get("/library/:libraryId", LibraryController.loadLibrary)
+    .get("/controlpanel/libraries", LibraryController.loadLibraryControlPanel)
     .get("/read/:bookId", ChapterController.readChapter)
     .post("/chapter/update/:chapterId", ChapterController.updateChapter)
     .post("/chapter/create/:bookId", ChapterController.createChapter)
+    .post("/library/create", ChapterController.createChapter)
+
 
     // Authentication/login
     .get("/login", (req, res) => {
