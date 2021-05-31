@@ -73,15 +73,71 @@ async function updateChapter(req, res) {
         });
     }
     chapter.markdown = newMarkdown.toString();
-    let savedChapter = await chapter.save();
-    if(!savedChapter) {
-        res.status(500).render("pages/error", {
-            message: "The changes to the chapter failed to save.",
-            status: "500 - Server could not save changes."
+    chapter.save()
+        .then((result) => {
+            console.log(`[ DEBUG ] ${result}`);
+            res.status(200).json(result);
+        })
+        .catch((err) => {
+            console.log(`[ DEBUG ] ${err}`);
+            res.status(404).render("pages/error", {
+                message: "The chapter could not be saved.",
+                status: "500 - Internal server error."
+            });
         });
-
-    }
     res.status(200).json(savedChapter);
 }
 
-export default {readChapter, updateChapter};
+async function createChapter(req, res) {
+    let parentBook = await Book.findById(req.params.bookId);
+    if (!parentBook) {
+        res.status(404).render("pages/error", {
+            message: "The book you are trying to add a chapter to could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    let {name, tags, markdown} = req.body;
+    if (!name) {
+        res.status(400).render("pages/error", {
+            message: "The new chapter could not be created.",
+            status: "400 - No name specified."
+        });
+    }
+    // While a chapter does not need to contain any tags or markdown content, I
+    // still want to ensure that the fields exist, so I'm setting them manually
+    // if the request does not contain any information.
+    if (!tags) {
+        tags = [];
+    }
+    if (!markdown) {
+        markdown = `# ${name}`;
+    }
+    try {
+        let newChapter = await Chapter.create({
+            name,
+            markdown,
+            tags
+        });
+        parentBook.chapters.push(newChapter.id);
+        // TODO: Why does this cause an error?
+        parentBook.save()
+            .then((result) => {
+                console.log(`[ DEBUG ] ${result}`);
+                res.redirect(`/read/${parentBook.id}?chapter=${parentBook.length-1}`);
+            })
+            .catch((err) => {
+                console.log(`[ DEBUG ] ${err}`);
+                res.status(500).render("pages/error", {
+                    message: "The new chapter was created, but could not be added to the book's chapter list.",
+                    status: "500 - Internal server error."
+                });
+            })
+    } catch {
+        res.status(500).render("pages/error", {
+            message: "The new chapter could not be created.",
+            status: "500 - Internal server error."
+        });
+    }
+}
+
+export default {readChapter, updateChapter, createChapter};

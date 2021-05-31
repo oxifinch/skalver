@@ -4,24 +4,24 @@ const bookSchema = new mongoose.Schema({
     title: {
         type: String,
         minLength: 1,
-        maxLength: 40,
+        maxLength: 60,
         required: true
     },
     subtitle: {
         type: String,
         minLength: 1,
-        maxLength: 40,
+        maxLength: 60,
         required: false
     },
     author: {
         type: String,
-        maxLength: 40,
+        maxLength: 60,
         required: true
     },
     coauthors: [
         {
             type: String,
-            maxLength: 40,
+            maxLength: 60,
             required: false
         }
     ],
@@ -41,7 +41,7 @@ const bookSchema = new mongoose.Schema({
             maxLength: 30,
             required: false,
         }
-    ]
-});
+    ],
+}, {collection: "books"});
 
 export default mongoose.model("book", bookSchema);

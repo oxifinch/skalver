@@ -20,6 +20,6 @@ const chapterSchema = new mongoose.Schema({
             required: false
         }
     ]
-});
+}, {collection: "chapters"});
 
 export default mongoose.model("chapter", chapterSchema);
