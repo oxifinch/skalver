@@ -5,6 +5,7 @@
         <title><%= book.title %> | Skalver</title>
 		<meta name="description" content="Skalver reading page"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="/css/style.css">
         <style>
             .hidden {
                 display: none;
@@ -17,7 +18,7 @@
 
 	<body>
         <header>
-            <button><a href="/dashboard">Go Back</a></button>
+            <button class="btn btn-primary text-light"><a href="/dashboard">Go Back</a></button>
             <p><%= book.title %> by <%= book.author %> | <%= chapterNumber %>: <%= chapter.name %></p>
         </header>
         <div id="new_chapter_window" class="hidden">
