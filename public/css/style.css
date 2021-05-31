@@ -10729,5 +10729,9 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.header_dashboard {
+  display: flex;
+  border: 2px solid red;
+}
 
 /*# sourceMappingURL=style.css.map */
