@@ -36,6 +36,10 @@ router
     })
     .post("/login", (req, res) => {
         console.log(req.body);
+        // UserModel: check database for password and username match
+        req.session.userName = "joseph"
+        req.session.userId = "abc123";
+        console.log(req.session);
         res.send("LOGIN POST ROUTE");
     })
     .get("/register", (req, res) => {
