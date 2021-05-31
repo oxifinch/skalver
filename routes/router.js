@@ -2,6 +2,7 @@ import express from "express";
 import LibraryController from "../controllers/Library.js";
 //import BookController from "../controllers/Book.js";
 import ChapterController from "../controllers/Chapter.js";
+import UserController from "../controllers/User.js";
 
 const router = express.Router();
 
@@ -25,24 +26,23 @@ router
         res.render("pages/homepage");
     })
     // Main app routes
-    .get("/dashboard", LibraryController.getActiveLibrary)
+    .get("/dashboard", LibraryController.loadActiveLibrary)
+    .get("/library/:libraryId", LibraryController.loadLibrary)
+    .get("/controlpanel/libraries", LibraryController.loadLibraryControlPanel)
     .get("/read/:bookId", ChapterController.readChapter)
     .post("/chapter/update/:chapterId", ChapterController.updateChapter)
     .post("/chapter/create/:bookId", ChapterController.createChapter)
+    .post("/library/create", LibraryController.createLibrary)
+
 
     // Authentication/login
     .get("/login", (req, res) => {
         res.render("pages/login"); 
     })
-    .post("/login", (req, res) => {
-        console.log(req.body);
-        res.send("LOGIN POST ROUTE");
-    })
+    .post("/login", UserController.loginUser)
     .get("/register", (req, res) => {
         res.render("pages/register");
     })
-    .post("/register", (req, res) => {
-        res.send("REGISTER POST ROUTE");
-    })
+    .post("/register", UserController.createUser)
 
 export default {routes: router};
