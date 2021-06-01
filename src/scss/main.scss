@@ -1,0 +1,15 @@
+// Required
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+@import "vendors/vendors";
+
+// Default variable overrides
+// == COLORS ==
+
+// == PAGES ==
+@import "pages/login";
+@import "pages/register";
+@import "pages/read";
+@import "pages/dashboard";
