@@ -10729,6 +10729,12 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+main {
+  display: flex;
+  height: 100vh;
+  justify-content: flex-start;
+}
+
 .header_dashboard {
   display: flex;
   border: 2px solid red;
