@@ -1,9 +1,28 @@
-#body_login {
-        
+//#body_login {
+//        
+//}
+//
+//#main_login {
+//    display: flex;
+//    height: 100vh;
+//    justify-content: flex-start;
+//}
+#page_container_login {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#header_login {
+    border: 1px solid green;
 }
 
 #main_login {
-    display: flex;
-    height: 100vh;
-    justify-content: flex-start;
+    height: 70vh;
+    border: 1px solid blue;
+}
+
+#footer_login {
+    border: 1px solid red;
 }

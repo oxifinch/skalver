@@ -9,9 +9,14 @@
 	</head>
 
 	<body>
-        <main id="main_login" class="container align-items-center">
-            <div class="row">
-                <div class="m-5 col col-md-4">
+        <div id="page_container_login" class="container vh-100">
+            <header id="header_login" class="row align-items-start">
+                <h1 class="text-center">Skalver</h1>
+                <p class="text-center">The distraction-free worldbuiling tool</p>
+            </header>
+
+            <main id="main_login" class="row align-items-start">
+                <div class="col-7 mt-5">
                     <form action="/login" method="POST">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput"
@@ -25,19 +30,20 @@
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Login</button>
                     </form> 
-                    <div>
-                        <p>Don't have an account?</p>
-                        <a href="/register">Register here!</a>
-                    </div>
-                </div>    
-                <div class="m-5 col-4">
+                </div>
+                <div class="col-5 mt-5">
                     <p>Welcome to Skalver - The web app for worldbuilders and
                     writers looking to structure their work without overbearing
                     user interfaces and complicated features getting in the way
                     of what really matters: writing.</p>
                 </div>
-            </div>
-        </main>
+            </main>
+
+            <footer id="footer_login" class="row align-items-center">
+                <p class="col-8">Image credits goes here and such</p>
+                <p class="col-4">Links and stuff</p>
+            </footer>
+        </div>
 	</body>
 </html>
 
