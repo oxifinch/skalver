@@ -8,8 +8,9 @@
         <link rel="stylesheet" href="/css/style.css">
 	</head>
 
-	<body id="page_container_login" class="d-flex h-100">
-        <div class="d-flex flex-column justify-content-between">
+	<body id="page_container_login" class="d-flex vh-100">
+        <div id="page_wrapper_login" class="d-flex flex-column
+            justify-content-between w-100">
 
             <header class="p-2">
                 <div class="text-light d-flex align-items-center justify-content-around">
@@ -40,12 +41,14 @@
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Login</button>
                         </form> 
+                        <p class="text-secondary mt-3">Don't have an account? <a
+                            class="text-warning" href="/register">Register</a></p>
                     </div>
                     <div class="col-3 text-light">
                         <p>Welcome to Skalver - a minimalist digital library for
                         writers and worldbuilders who want a distraction free
-                        environment to gather and structure documents, notes and
-                        stories.</p>
+                        environment to write, gather and structure documents,
+                        notes and stories.</p>
                         <p>Skalver aims to be the best of both worlds in terms of
                         ease of use and organization, to keep as little as possible
                         standing between you and what really matters: just writing.</p>
@@ -55,17 +58,16 @@
 
             <footer class="text-light row p-2 w-100">
                 <div class="col-8">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptates eos omnis pariatur excepturi, libero odio, ea
-                    fuga voluptas vitae tempora, aliquam commodi tempore maxime
-                    facilis?</p>
+                    <h5 class="p-1 mb-0">Image Credits: </h5>
+                    <div class="d-flex flex-wrap">
+                        <a class="p-1"href="https://www.pexels.com/@chuck?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Wallace Chuck</a>
+                    </div>
                 </div>
                 <div class="col-4">
                     <h5>Follow the project on GitHub</h5>
                     <a href="www.github.com/oxifinch/skalver">Skalver on GitHub</a>
                 </div>
             </footer>
-
         </div>
 	</body>
 </html>

@@ -10734,6 +10734,10 @@ textarea.form-control-lg {
   box-shadow: 0 0 24px 2px black inset;
 }
 
+#page_wrapper_login {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 .header_dashboard {
   display: flex;
   border: 2px solid red;
