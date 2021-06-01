@@ -10730,13 +10730,8 @@ textarea.form-control-lg {
   }
 }
 #page_container_login {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-#main_login {
-  height: 70vh;
+  background-image: url("https://images.pexels.com/photos/3109168/pexels-photo-3109168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  box-shadow: 0 0 24px 2px black inset;
 }
 
 .header_dashboard {

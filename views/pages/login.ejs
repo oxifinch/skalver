@@ -8,41 +8,49 @@
         <link rel="stylesheet" href="/css/style.css">
 	</head>
 
-	<body>
-        <div id="page_container_login" class="container vh-100">
-            <header id="header_login" class="row align-items-start mt-3">
-                <h1>Skalver</h1>
-                <p>The distraction-free worldbuiling tool</p>
+	<body id="page_container_login" class="d-flex h-100">
+        <div class="d-flex w-100 h-100 mx-auto flex-column">
+
+            <header class="mb-auto">
+                <div class="row">
+                    <div class="col-4 text-light">
+                        <h1>Skalver</h1>
+                        <p><em>The distraction free worldbuilding tool</em></p>
+                    </div>
+                    <div class="col-6">
+                        <nav>
+                            <a href="/about">About</a>
+                            <a href="/feedback">Feedback</a>
+                        </nav> 
+                    </div>
+                    <button class="btn btn-outline-primary col-2">Register</button>
+                </div>
             </header>
 
-            <main id="main_login" class="row align-items-center h-100">
-                <div class="col-5 mt-5 bg-gradient bg-dark p-3 rounded">
-                    <form action="/login" method="POST">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput"
-                            placeholder="Username" name="username" required>
-                            <label for="floatingInput">Username</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword"
-                            placeholder="Password" name="password" required>
-                            <label for="floatingPassword">Password</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
-                    </form> 
+            <main class="px-3">
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
                 </div>
-                <div class="col-3 mt-5 p-3">
-                    <p>Welcome to Skalver - The web app for worldbuilders and
-                    writers looking to structure their work without overbearing
-                    user interfaces and complicated features getting in the way
-                    of what really matters: writing.</p>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
                 </div>
             </main>
 
-            <footer id="footer_login" class="row align-items-center">
-                <p class="col-8">Image credits goes here and such</p>
-                <p class="col-4">Links and stuff</p>
+            <footer class="mt-auto">
+                <div class="row">
+                    <div class="col-8">
+                        <h4>Image Credits</h4>
+                        <ul>
+                            <li><a href="https://www.pexels.com/@francesco-ungaro?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Francesco Ungaro</a></li>
+                            <li><a href="https://www.pexels.com/@chuck?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Wallace Chuck</a></li>
+                        </ul>
+                    </div>
+
+                </div>
             </footer>
+
         </div>
 	</body>
 </html>
