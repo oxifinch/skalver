@@ -21,7 +21,6 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
-app.use(router.routes);
 app.use(session({
     name: SESSION_NAME,
     secret: SESSION_SECRET,
@@ -33,6 +32,7 @@ app.use(session({
         secure: NODE_ENV === "production"
     }
 }));
+app.use(router.routes);
 
 // TODO: How to store users/sessions?
 mongoose.connect(DB_CONNECTION_STRING, {
