@@ -10,7 +10,7 @@
 
 	<body>
         <main>
-            <%- include ("../partials/dashboard-header.ejs") %>
+            <%- include ("../partials/library-header.ejs") %>
             <div id="library_sections">
                 <% library.sections.forEach((section) => { %>
                 <%- include("../partials/library-section.ejs", {section: section}) %>
