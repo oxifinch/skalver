@@ -86,17 +86,22 @@ async function loadLibrary(req, res) {
             path: "sections",
             populate: {
                 path: "books",
-                select: ["title", "author"]
+                select: [
+                    "title",
+                    "author",
+                    "subtitle",
+                    "tags",
+                ]
             }
         })
         .populate({
             path: "books",
-            select: {
-                title: true,
-                author: true,
-                series: true,
-                tags: true
-            }
+            select: [
+                "title",
+                "author",
+                "series",
+                "tags",
+            ]
         })
         .exec();
     user.save()
