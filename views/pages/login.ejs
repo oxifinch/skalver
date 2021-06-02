@@ -8,36 +8,67 @@
         <link rel="stylesheet" href="/css/style.css">
 	</head>
 
-	<body>
-        <header>
-        </header>
-        <main class="container align-items-center">
-            <div class="row">
-                <div class="m-5 col col-md-4">
-                    <form action="/login" method="POST">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput"
-                            placeholder="Username" name="username" required>
-                            <label for="floatingInput">Username</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword"
-                            placeholder="Password" name="password" required>
-                            <label for="floatingPassword">Password</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
-                    </form> 
-                    <p>Don't have an account?</p>
-                    <a href="/register">Register here!</a>
-                </div>    
-                <div class="m-5 col-4">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
-                    eaque nisi vitae eos neque, eveniet veritatis molestias quo
-                    explicabo quas!</p>
+	<body id="page_container_login" class="d-flex vh-100">
+        <div id="page_wrapper_login" class="d-flex flex-column
+            justify-content-between w-100">
+
+            <header class="p-2">
+                <div class="text-light d-flex align-items-center justify-content-around">
+                    <div>
+                        <h1 class="h3 mb-1">Skalver</h1>
+                        <p class="mb-1"><em>The distraction free worldbuilding tool</em></p>
+                    </div>
+                    <div>
+                        <a class="btn btn-outline-light" href="/about">About</a>
+                        <a class="btn btn-outline-light" href="/feedback">Feedback</a>
+                        <a class="btn btn-outline-warning" href="/register">Register</a>
+                    </div>
+            </header>
+
+            <main class="px-3 w-100 container">
+                <div class="row justify-content-center">
+                    <div class="col-5">
+                        <form action="/login" method="POST">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput"
+                                placeholder="Username" name="username" required>
+                                <label for="floatingInput">Username</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPassword"
+                                placeholder="Password" name="password" required>
+                                <label for="floatingPassword">Password</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </form> 
+                        <p class="text-secondary mt-3">Don't have an account? <a
+                            class="text-warning" href="/register">Register</a></p>
+                    </div>
+                    <div class="col-3 text-light">
+                        <p>Welcome to Skalver - a minimalist digital library for
+                        writers and worldbuilders who want a distraction free
+                        environment to write, gather and structure documents,
+                        notes and stories.</p>
+                        <p>Skalver aims to be the best of both worlds in terms of
+                        ease of use and organization, to keep as little as possible
+                        standing between you and what really matters: just writing.</p>
+                    </div>
                 </div>
-            </div>
-        </main>
-        
+            </main>
+
+            <footer class="text-light row p-2 w-100">
+                <div class="col-8">
+                    <h5 class="p-1 mb-0">Image Credits: </h5>
+                    <div class="d-flex flex-wrap">
+                        <a class="p-1"href="https://www.pexels.com/@chuck?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Wallace Chuck</a>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <h5>Follow the project on GitHub</h5>
+                    <a href="www.github.com/oxifinch/skalver">Skalver on GitHub</a>
+                </div>
+            </footer>
+        </div>
 	</body>
 </html>
 
