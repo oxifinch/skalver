@@ -1,0 +1,22 @@
+<div id="dashboard_createnew_popup" class="modal">
+    <div class="modal-dialog border border-secondary rounded">
+        <div class="modal-content bg-dark">
+            <div class="modal-header text-light">
+                <h3 class="modal-title">Create New Library</h3>
+            </div>
+            <div class="modal-body text-light">
+                <form action="/library/create" method="POST">
+                    <div class="mb-3">
+                        <label for="create_library_name" class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" id="create_library_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="create_library_description" class="form-label">Description</label>
+                        <textarea name="description" class="form-control" rows="6" id="create_library_description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Create Library</button>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
