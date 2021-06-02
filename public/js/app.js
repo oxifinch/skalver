@@ -39,7 +39,11 @@ function saveMarkdown() {
         }
     })
     .then(res => res.json())
-    .then(json => console.log(json))
+    .then(json => {
+        console.log(json);
+        // TODO: Populate page with new html instead of reloading
+        location.reload();
+    })
     .catch(err => console.log(err));
 }
 
