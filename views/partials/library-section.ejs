@@ -1,8 +1,15 @@
-<div class="library_section">
-    <h2><%= section.name %></h2>
-    <div class="library_section_books">
+<div class="library_section col border border-secondary rounded px-0 d-flex
+    flex-column justify-content-between">
+    <h3 class="text-light text-center h4 bg-dark py-1"><%= section.name %></h3>
+    <div class="library_section_books p-1 overflow-hidden flex-grow-1">
         <% section.books.forEach((book) => { %> 
-            <h4><%= book.title %></h4>
+            <div class="bg-success rounded p-1">
+                <p class="text-light mb-0"><%= book.title %><span
+                    class="text-info"> by <%= book.author %></span></p>
+            </div>
         <% }); %> 
     </div>  
+    <div class="p-1">
+        <button class="btn btn-outline-light w-100">View All</button>
+    </div>
 </div>   

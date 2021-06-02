@@ -2,7 +2,7 @@
     <div class="col-5">
         <% if(user.libraries.length < 3) { %>
             <p class="text-light text-center">You can create <span class="text-warning"><%= 3 - user.libraries.length%></span> more libraries</p> 
-        <button id="button_create_new_library" class="btn btn-success w-100">Create New Library</button>
+        <button data-bs-toggle="modal" data-bs-target="#dashboard_createnew_popup" id="button_create_new_library" class="btn btn-success w-100">Create New Library</button>
         <% } else { %>
             <p class="text-light text-center">You cannot create any more libraries.</p>
         <% } %>
