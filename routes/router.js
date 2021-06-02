@@ -10,6 +10,10 @@ function redirectLogin(req, res, next) {
     // TODO: If the user is not authenticated, they should not be able to 
     // go to the dashboard. If an unauthenticated user tries to go to dashboard,
     // send them to login page.
+    if(!req.session.userId || !req.session.userName || !req.session) {
+        res.redirect("/");
+        next();
+    } 
 }
 
 function redirectDashboard(req, res, next) {
@@ -40,6 +44,7 @@ router
         res.render("pages/login"); 
     })
     .post("/login", UserController.loginUser)
+    .get("/logout", UserController.logoutUser)
     .get("/register", (req, res) => {
         res.render("pages/register");
     })

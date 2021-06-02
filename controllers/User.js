@@ -54,7 +54,13 @@ async function loginUser(req, res, next) {
 }
 
 async function logoutUser(req, res, next) {
-    // TODO: Destroy session and return to login page
+    req.session.destroy((err) => {
+        if(err) {
+            return res.status(500).redirect("/controlpanel");
+        }
+        res.clearCookie();
+        res.status(200).redirect("/");
+    })
 }
 
 async function loadUserControlpanel(req, res, next) {
@@ -82,5 +88,6 @@ async function loadUserControlpanel(req, res, next) {
 export default {
     createUser, 
     loginUser,
+    logoutUser,
     loadUserControlpanel
 };
