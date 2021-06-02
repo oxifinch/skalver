@@ -22,7 +22,7 @@ async function createUser(req, res, next) {
         .then((result) => {
             req.session.userName = result.username;
             req.session.userId = result.id;
-            res.redirect("/controlpanel/libraries");
+            res.redirect("/controlpanel");
         })
         .catch(err => {
             console.log(err);
@@ -48,13 +48,7 @@ async function loginUser(req, res, next) {
         } else if (passwordMatch) {
             req.session.userName = user.username;
             req.session.userId = user.id;
-            if(!user.activeLibrary || user.libraries.length === 0) {
-                res.redirect("/controlpanel/libraries");
-                next();
-            } else {
-                res.redirect("/dashboard");
-                next();
-            }
+            res.status(200).redirect("/controlpanel");
         }
     }
 }

@@ -23,7 +23,7 @@ router
     .get("/", (req, res) => {
         // TODO: User should be directed to login page if they are not 
         // already signed in, or redirected to dashboard if they are
-        res.render("pages/homepage");
+        res.render("pages/login");
     })
     // Main app routes
     .get("/dashboard", LibraryController.loadActiveLibrary)
