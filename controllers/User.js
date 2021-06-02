@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
 async function createUser(req, res, next) {
@@ -8,7 +9,7 @@ async function createUser(req, res, next) {
     }
     let userExists = await User.exists({username: username});
     if(userExists) {
-        res.redirect("/login");
+        res.redirect("/");
         next();
     } else if (!userExists) {
         const salt = await bcrypt.genSalt(10);
@@ -17,12 +18,12 @@ async function createUser(req, res, next) {
             username: username,
             password: hashedPassword,
             libraries: [],
-            activeLibrary: null
+            activeLibrary: new mongoose.mongo.ObjectId()
         })
         .then((result) => {
             req.session.userName = result.username;
             req.session.userId = result.id;
-            res.redirect("/controlpanel");
+            res.redirect("/dashboard");
         })
         .catch(err => {
             console.log(err);
@@ -38,17 +39,17 @@ async function loginUser(req, res, next) {
     const {username, password} = req.body; 
     const user = await User.findOne({username: username}).exec();
     if(!user) {
-        res.redirect("/login");
+        res.redirect("/");
         next();
     } else {
         const passwordMatch = await bcrypt.compare(password, user.password);
         if(!passwordMatch) {
-            res.redirect("/login");
+            res.redirect("/");
             next();
         } else if (passwordMatch) {
             req.session.userName = user.username;
             req.session.userId = user.id;
-            res.status(200).redirect("/controlpanel");
+            res.status(200).redirect("/dashboard");
         }
     }
 }
@@ -56,38 +57,38 @@ async function loginUser(req, res, next) {
 async function logoutUser(req, res, next) {
     req.session.destroy((err) => {
         if(err) {
-            return res.status(500).redirect("/controlpanel");
+            return res.status(500).redirect("/dashboard");
         }
         res.clearCookie();
         res.status(200).redirect("/");
     })
 }
 
-async function loadUserControlpanel(req, res, next) {
+async function loadUserDashboard(req, res) {
     if(!req.session.userName || !req.session.userId) {
-        res.redirect("/login");
+        res.redirect("/");
     }
-    const user = await User.findById(req.session.userId)
+    User.findById(req.session.userId)
         .populate({
             path: "libraries"
         })
-        .exec();
-    if(!user) {
-        res.status(404).render("pages/error", {
-            message: "You user account could not be located.",
-            status: "404 - Not found."
+        .exec()
+        .then((user) => {
+            res.status(200).render("pages/dashboard", {
+                user: user
+            });
+        })
+        .catch(() => {
+            res.status(404).render("pages/error", {
+                message: "Your user account could not be located.",
+                status: "404 - Not found."
+            });
         });
-    } else {
-        res.status(200).render("pages/controlpanel", {
-            user: user 
-        });
-    }
-
 }
 
 export default {
     createUser, 
     loginUser,
     logoutUser,
-    loadUserControlpanel
+    loadUserDashboard
 };
