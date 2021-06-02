@@ -10760,15 +10760,15 @@ textarea.form-control-lg {
   display: none;
 }
 
-#page_container_controlpanel {
+#page_container_dashboard {
   background-image: url("https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
 }
 
-#page_wrapper_controlpanel {
+#page_wrapper_dashboard {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-#cover_controlpanel {
+#cover_dashboard {
   background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 24px 2px black inset;
   z-index: -1;
