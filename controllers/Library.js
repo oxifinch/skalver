@@ -61,6 +61,7 @@ async function loadLibrary(req, res, next) {
     const libraryQuery = req.params.libraryId;
     const requestedLibrary = user.libraries.find(obj => obj.id === libraryQuery);
     if(!requestedLibrary) {
+        console.log("Didn't find anything!");
         res.status(404).render("pages/error", {
             message: "The requested library could not be located.",
             status: "404 - Not found."
@@ -74,7 +75,11 @@ async function loadLibraryControlPanel(req, res) {
     if(!req.session.userName || !req.session.userId) {
         res.redirect("/login");
     }
-    const user = await User.findById(req.session.userId);
+    const user = await User.findById(req.session.userId)
+        .populate({
+            path: "libraries"
+        })
+        .exec();
     if(!user) {
         res.status(404).render("pages/error", {
             message: "You user account could not be located.",
