@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Skalver | Libraries</title>
+		<title>Skalver | Dashboard</title>
 		<meta name="description" content="Library control panel for Skalver web app"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="/css/style.css">
@@ -11,9 +11,9 @@
 	<body id="page_container_controlpanel">
         <div id="page_wrapper_controlpanel" class="container d-flex flex-column
             vh-100">
-            <%- include("../partials/controlpanel-header.ejs", user)%>
-            <%- include ("../partials/controlpanel-libraries.ejs", user)%>
-            <%- include ("../partials/controlpanel-createprompt.ejs", user)%>
+            <%- include("../partials/dashboard-header.ejs", user)%>
+            <%- include ("../partials/dashboard-libraries.ejs", user)%>
+            <%- include ("../partials/dashboard-createprompt.ejs", user)%>
         </div>
         <div id="form_create_new_library" class="hidden">
             <form action="/library/create" method="POST">
@@ -23,7 +23,6 @@
             </form>
         </div>
         <div id="cover_controlpanel" class="fixed-top vh-100 vw-100"></div>
-        <!-- <button id="button_create_new_library">Create New Library</button>-->
         <script src="/js/librarycontrols.js"></script>
 	</body>
 </html>

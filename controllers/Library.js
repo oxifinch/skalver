@@ -3,21 +3,21 @@ import Section from "../models/Section.js";
 import Book from "../models/Book.js";
 import User from "../models/User.js";
 
+// TODO: Change this function so that it only reads from the active library of
+// the user and redirects there
 async function loadActiveLibrary(req, res) {
     if(!req.session.userName || !req.session.userId) {
-        res.redirect("/login");
+        res.redirect("/");
     }
     const user = await User.findById(req.session.userId);
-    console.log(user);
     if(!user) {
         res.status(404).render("pages/error", {
             message: "You user account could not be located.",
             status: "404 - Not found."
         });
     }
-    // TODO: Redirect to library creation page
     if(user.libraries.length < 1 || !user.activeLibrary) {
-        loadLibraryControlPanel(req, res);
+        res.status(404).redirect("/dashboard");
     }
     let library = await Library.findById(user.activeLibrary)
         .populate({
@@ -38,18 +38,20 @@ async function loadActiveLibrary(req, res) {
         })
         .exec();
     if (!library) {
-        res.status(404).json({message: "Library not found."});
+        return res.status(404).render("pages/error", {
+            message: "Sorry, the library could not be located.",
+            status: "404 - Not found."
+        });
     } else {
-        res.status(200).render("index", {
+        return res.status(200).render("pages/library", {
             library: library
         });
     }
 }
 
 async function loadLibrary(req, res, next) {
-    // TODO: Checking that there is a user logged in should be its own function
     if(!req.session.userName || !req.session.userId) {
-        res.redirect("/login");
+        res.redirect("/");
     }
     const user = await User.findById(req.session.userId)
         .populate({
@@ -62,8 +64,23 @@ async function loadLibrary(req, res, next) {
             status: "404 - Not found."
         });
     }
-    const libraryQuery = req.params.libraryId;
-    const requestedLibrary = user.libraries.find(obj => obj.id === libraryQuery);
+    let libraryQuery = req.query.libraryId;
+    if(!libraryQuery) {
+        if(!user.activeLibrary) {
+            libraryQuery = user.libraries[0].id.toString().trim();
+        } else {
+            libraryQuery = user.activeLibrary.toString().trim();
+        }
+    }
+    const requestedLibrary = await user.libraries.find(obj => obj.id === libraryQuery);
+    //let requestedLibrary = null;
+    //for (let i = 0; i < user.libraries.length; i++) {
+    //    const obj = user.libraries[i];
+    //    if (obj.id === libraryQuery) {
+    //        console.log("Match!");
+    //        requestedLibrary = libraryQuery;
+    //    }
+    //}
     if(!requestedLibrary) {
         console.log("Didn't find anything!");
         res.status(404).render("pages/error", {
@@ -72,12 +89,33 @@ async function loadLibrary(req, res, next) {
         });
     }
     user.activeLibrary = requestedLibrary;
+    let libraryData = await Library.findById(user.activeLibrary)
+        .populate({
+            path: "sections",
+            populate: {
+                path: "books",
+                select: {title: 1}
+            }
+        })
+        .populate({
+            path: "books",
+            select: {
+                title: true,
+                author: true,
+                series: true,
+                tags: true
+            }
+        })
+        .exec();
     user.save()
         .then(() => {
-            res.status(200).redirect("/dashboard");
+            res.status(200).render("pages/library", {
+                user: user,
+                library: libraryData
+            });
         })
         .catch(() => {
-            res.status(500).redirect("controlpanel", {
+            res.status(500).redirect("/dashboard", {
                 message: "Sorry, the library could not be opened at this time."
             });
         });
@@ -85,7 +123,7 @@ async function loadLibrary(req, res, next) {
 
 async function createLibrary(req, res) {
     if(!req.session.userName || !req.session.userId) {
-        res.redirect("/login");
+        res.redirect("/");
     }
     const user = await User.findById(req.session.userId);
     if(!user) {

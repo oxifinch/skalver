@@ -7,7 +7,7 @@
                 <hr class="mt-1 mb-1">
                 <p class="mb-1 mt-1"><%= library.description %></p>
                 <p><span class="badge bg-primary"><%= library.books.length %></span> books</p>
-                <a href="/library/<%= library.id %>" class="btn btn-primary w-25">Open</a>
+                <a href="/library?libraryId=<%= library.id %>" class="btn btn-primary w-25">Open</a>
             </div>
         <% }); %>
     <% } else { %>
