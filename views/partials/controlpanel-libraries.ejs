@@ -1,0 +1,17 @@
+<div class="row d-flex flex-column p-4 border-top border-bottom">
+    <% if(user.libraries.length > 0) { %> 
+        <% user.libraries.forEach((library) => { %>
+            <div class="d-flex flex-column bg-dark text-light p-2 rounded mb-2
+                border-secondary border">
+                <h3 class="mb-0 mt-2"><%= library.name %></h3>
+                <hr class="mt-1 mb-1">
+                <p class="mb-1 mt-1"><%= library.description %></p>
+                <p><span class="badge bg-primary"><%= library.books.length %></span> books</p>
+                <a href="/library/<%= library.id %>" class="btn btn-primary w-25">Open</a>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <h2>You have no libraries!</h2>
+        <button>Create New Library</button>
+    <% } %>
+</div>

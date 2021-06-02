@@ -2,7 +2,16 @@
     display: none;
 }
 
-#main_controlpanel_libraries {
-    height: 70vh;
-    border: 2px solid red;
+#page_container_controlpanel {
+    background-image: url("https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+}
+
+#page_wrapper_controlpanel {
+    background-color: rgba(#000000, 0.7);
+}
+
+#cover_controlpanel {
+    background-color: rgba(#000000, 0.5);
+    box-shadow: 0 0 24px 2px black inset;
+    z-index: -1;
 }
