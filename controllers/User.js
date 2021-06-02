@@ -63,7 +63,30 @@ async function logoutUser(req, res, next) {
     // TODO: Destroy session and return to login page
 }
 
+async function loadUserControlpanel(req, res, next) {
+    if(!req.session.userName || !req.session.userId) {
+        res.redirect("/login");
+    }
+    const user = await User.findById(req.session.userId)
+        .populate({
+            path: "libraries"
+        })
+        .exec();
+    if(!user) {
+        res.status(404).render("pages/error", {
+            message: "You user account could not be located.",
+            status: "404 - Not found."
+        });
+    } else {
+        res.status(200).render("pages/controlpanel", {
+            user: user 
+        });
+    }
+
+}
+
 export default {
     createUser, 
-    loginUser
+    loginUser,
+    loadUserControlpanel
 };
