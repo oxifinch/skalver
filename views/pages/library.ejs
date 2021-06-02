@@ -8,21 +8,14 @@
         <link rel="stylesheet" href="/css/style.css">
 	</head>
 
-	<body id="page_container_library">
-        <main>
-            <%- include ("../partials/library-header.ejs") %>
-            <div id="library_sections">
-                <% library.sections.forEach((section) => { %>
-                <%- include("../partials/library-section.ejs", {section: section}) %>
-                <% }); %> 
-            </div> 
-
-            <div id="library_browse">
-                <% library.books.forEach((book) => { %>
-                <%- include("../partials/library-browse-listitem.ejs", {book: book}) %>
-                <% }); %>
-            </div> 
+	<body id="page_container_library" class="d-flex flex-column vh-100">
+        <%- include ("../partials/library-header.ejs") %>
+        <main class="flex-grow-1">
+            <%- include ("../partials/library-section-container.ejs", {sections: library.sections}) %>
         </main>
+        <footer>
+            <p>footer here</p>
+        </footer>
 	</body>
 </html>
 

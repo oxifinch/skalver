@@ -1,0 +1,11 @@
+<div class="container mt-2 mb-2 h-100">
+    <h2 class="h4 text-light text-center border-bottom border-secondary">Sections</h2>
+    <div class="row row-cols-3 h-50 overflow-auto">
+        <% library.sections.forEach((section) => { %> 
+            <%- include("./library-section.ejs", {section: section}) %>
+        <% }); %>
+    </div>
+    <h2 class="h4 text-light text-center border-bottom border-secondary">Uncategorized</h2>
+    <div class="row h-25">
+    </div>
+</div>

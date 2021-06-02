@@ -86,7 +86,7 @@ async function loadLibrary(req, res) {
             path: "sections",
             populate: {
                 path: "books",
-                select: {title: 1}
+                select: ["title", "author"]
             }
         })
         .populate({

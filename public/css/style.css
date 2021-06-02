@@ -10776,4 +10776,8 @@ textarea.form-control-lg {
   background-size: cover;
 }
 
+.library_section {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 /*# sourceMappingURL=style.css.map */
