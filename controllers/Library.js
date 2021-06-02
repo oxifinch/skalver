@@ -1,5 +1,7 @@
 import Library from "../models/Library.js";
 import User from "../models/User.js";
+import Book from "../models/Book.js";
+import Section from "../models/Section.js";
 
 // TODO: Change this function so that it only reads from the active library of
 // the user and redirects there
