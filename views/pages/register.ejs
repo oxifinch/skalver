@@ -2,21 +2,77 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Skalver | Dashboard</title>
-		<meta name="description" content="Dashboard of Skalver web app"/>
+		<title>Skalver | Register</title>
+		<meta name="description" content="Registration page of Skalver web app"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="/css/style.css">
 	</head>
 
-	<body>
-        <main>
-            <form action="/register" method="POST">
-                <input type="text" name="username" placeholder="Username" required>            
-                <input type="password" name="password" placeholder="Password" required>            
-                <button type="submit">Register</button>
-            </form> 
-            <p>Already have an account?</p>
-            <a href="/login">Login</a>
-        </main>
+	<body id="page_container_register" class="d-flex vh-100">
+        <div id="page_wrapper_register" class="d-flex flex-column
+            justify-content-between w-100">
+
+            <header class="p-2">
+                <div class="text-light d-flex align-items-center justify-content-around">
+                    <div>
+                        <h1 class="h3 mb-1">Skalver</h1>
+                        <p class="mb-1"><em>The distraction free worldbuilding tool</em></p>
+                    </div>
+                    <div>
+                        <a class="btn btn-outline-light" href="/about">About</a>
+                        <a class="btn btn-outline-light" href="/feedback">Feedback</a>
+                        <a class="btn btn-outline-warning" href="/Login">Login</a>
+                    </div>
+            </header>
+
+            <main class="px-3 w-100 container">
+                <div id="blurb" class="container justify-content-center w-50
+                    rounded p-2 mb-2">
+                    <div class="row text-light text-center">
+                        <p>Sign up to Skalver and start building your digital
+                        writing desk today!<br>With an account, you can: </p>
+                    </div>
+                    <ul class="row text-light text-left">
+                        <li>Create, write and edit books in up to 3 libraries</li>
+                        <li>Access your libraries and books from any browser</li> 
+                        <li><span class="text-warning"><strong>Coming soon: </strong></span>Create local backups of your work</li>
+                        <li><span class="text-warning"><strong>Coming soon: </strong></span>Create and save themes for each library</li>
+                    </ul>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-5">
+                        <form action="/register" method="POST">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput"
+                                placeholder="Username" name="username" required>
+                                <label for="floatingInput">Username</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPassword"
+                                placeholder="Password" name="password" required>
+                                <label for="floatingPassword">Password</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Register</button>
+                        </form> 
+                        <p class="text-secondary mt-3">Already have an account? <a
+                            class="text-warning" href="/login">Login</a></p>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="text-light row p-2 w-100">
+                <div class="col-8">
+                    <h5 class="p-1 mb-0">Image Credits: </h5>
+                    <div class="d-flex flex-wrap">
+                        <a class="p-1"href="https://www.pexels.com/@nietjuh?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Ylanite Koppens</a>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <h5>Follow the project on GitHub</h5>
+                    <a href="www.github.com/oxifinch/skalver">Skalver on GitHub</a>
+                </div>
+            </footer>
+        </div>
 	</body>
 </html>
 
