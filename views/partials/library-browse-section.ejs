@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <h2 class="text-light border-bottom border-light h3"><%= section.name %></h2> 
+    <% section.books.forEach((book) => { %>
+        <div class="row align-items-center bg-dark rounded my-2">
+            <div class="col-2 bg-secondary">
+                <img src="https://via.placeholder.com/175x85" alt="">
+            </div> 
+            <div class="col-6">
+                <h3 class="h4 text-light my-1"><%= book.title %></h3> 
+                <h4 class="h6 text-secondary my-1"><em>by <%= book.author %></em></h4>
+            </div>
+            <div class="col-2">
+                <% book.tags.forEach((tag) => { %>
+                    <p class="badge bg-primary m-0"><%= tag %></p>
+                <% }); %>
+            </div>
+            <div class="col-2">
+                <a class="btn btn-outline-warning w-100" href="/read/<%= book.id %>">Read</a>
+            </div>
+        </div>
+    <% }); %>
+</div>
