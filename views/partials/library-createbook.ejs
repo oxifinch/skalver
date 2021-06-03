@@ -1,0 +1,36 @@
+<div id="library_createbook_modal" class="modal">
+    <div class="modal-dialog border border-secondary rounded">
+        <div class="modal-content bg-dark">
+            <div class="modal-header text-light">
+                <h3 class="modal-title">Create New Book</h3>
+            </div>
+            <div class="modal-body text-light">
+                <form action="/book/create" method="POST">
+                    <div class="mb-3">
+                        <label for="create_book_title" class="form-label">Title</label>
+                        <input type="text" name="title" class="form-control" id="create_book_title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="create_book_subtitle" class="form-label">Subtitle</label>
+                        <input type="text" name="subtitle" class="form-control" id="create_book_subtitle">
+                    </div>
+                    <div class="mb-3">
+                        <label for="create_book_description" class="form-label">Description</label>
+                        <textarea name="description" class="form-control" rows="6" id="create_library_description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="create_book_author" class="form-label">Author</label>
+                        <input type="text" name="author" class="form-control" id="create_book_author">
+                    </div>
+                    <div class="mb-3">
+                        <label for="create_book_type" class="form-label">Type</label>
+                        <input type="text" name="type" class="form-control" id="create_book_type">
+                    </div>
+                    <p class="text-secondary">Under construction: Co-authors</p>
+                    <p class="text-secondary">Under construction: Section</p>
+                    <button type="submit" class="btn btn-primary w-100">Create Book</button>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
