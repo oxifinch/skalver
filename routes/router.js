@@ -1,6 +1,6 @@
 import express from "express";
 import LibraryController from "../controllers/Library.js";
-//import BookController from "../controllers/Book.js";
+import BookController from "../controllers/Book.js";
 import ChapterController from "../controllers/Chapter.js";
 import UserController from "../controllers/User.js";
 
@@ -14,12 +14,6 @@ function redirectLogin(req, res, next) {
         res.redirect("/");
         next();
     } 
-}
-
-function redirectDashboard(req, res, next) {
-    // TODO: If the user is logged in and tries to go to login or register
-    // page, they should be redirected to dashboard. If they want to go to
-    // login or register, they need to log out first
 }
 
 router
@@ -38,6 +32,7 @@ router
 
     // Books/chapters
     .get("/read/:bookId", ChapterController.readChapter)
+    .post("/book/create", BookController.createBook)
     .post("/chapter/update/:chapterId", ChapterController.updateChapter)
     .post("/chapter/create/:bookId", ChapterController.createChapter)
 
