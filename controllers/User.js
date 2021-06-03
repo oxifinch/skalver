@@ -49,6 +49,8 @@ async function loginUser(req, res, next) {
         } else if (passwordMatch) {
             req.session.userName = user.username;
             req.session.userId = user.id;
+            console.log("[ DEBUG ] Session userName: " + req.session.userName);
+            console.log("[ DEBUG ] Session userId: " + req.session.userId);
             res.status(200).redirect("/dashboard");
         }
     }

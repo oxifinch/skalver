@@ -13,10 +13,17 @@ const bookSchema = new mongoose.Schema({
         maxLength: 60,
         required: false
     },
+    description: {
+        type: String,
+        minLength: 1,
+        maxLength: 5000,
+        required: false
+    },
     author: {
         type: String,
+        minLength: 1,
         maxLength: 60,
-        required: true
+        required: false
     },
     coauthors: [
         {

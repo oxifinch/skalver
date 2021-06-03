@@ -9,6 +9,7 @@
 	</head>
 
 	<body id="page_container_library" class="d-flex flex-column vh-100">
+        <%- include ("../partials/library-createbook.ejs") %>
         <%- include ("../partials/library-header.ejs") %>
         <main id="library_browse_container" class="container flex-grow-1 p-1
             my-2 rounded">
@@ -23,10 +24,11 @@
             <div class="col-3">
                 <div class="d-flex flex-column">
                     <button class="btn btn-success">Create New Section</button>
-                    <button class="btn btn-success">Create New Book</button>
+                    <button data-bs-toggle="modal" data-bs-target="#library_createbook_modal" id="button_create_new_book" class="btn btn-success w-100">Create New Book</button>
                 </div>
             </div>
         </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 	</body>
 </html>
 
