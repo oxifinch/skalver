@@ -32,9 +32,12 @@ router
 
     // Books/chapters
     .get("/read/:bookId", ChapterController.readChapter)
-    .post("/book/create", BookController.createBook)
     .post("/chapter/update/:chapterId", ChapterController.updateChapter)
     .post("/chapter/create/:bookId", ChapterController.createChapter)
+    .post("/book/create", BookController.createBook)
+    // TODO: Surely this is not the correct way to do this? But how do I
+    // implement delete routes on the library page?
+    .get("/book/delete/:bookId", BookController.deleteBook)
 
 
     // Authentication/login
