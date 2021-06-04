@@ -13,9 +13,6 @@
         <%- include ("../partials/library-header.ejs") %>
         <main id="library_browse_container" class="container flex-grow-1 p-1
             my-2 rounded">
-            <% library.sections.forEach((section) => { %>
-                <%- include("../partials/library-browse-section.ejs", {section: section})%>
-            <% }); %>
         </main>
         <footer id="library_footer" class="row w-100 m-0">
             <div class="col-9 text-light">
@@ -23,7 +20,6 @@
             </div>
             <div class="col-3">
                 <div class="d-flex flex-column">
-                    <button class="btn btn-success">Create New Section</button>
                     <button data-bs-toggle="modal" data-bs-target="#library_createbook_modal" id="button_create_new_book" class="btn btn-success w-100">Create New Book</button>
                 </div>
             </div>

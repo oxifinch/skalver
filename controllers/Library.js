@@ -1,7 +1,7 @@
 import Library from "../models/Library.js";
 import User from "../models/User.js";
 import Book from "../models/Book.js";
-import Section from "../models/Section.js";
+//import Section from "../models/Section.js";
 
 async function loadLibrary(req, res) {
     if(!req.session.userName || !req.session.userId) {
@@ -36,18 +36,18 @@ async function loadLibrary(req, res) {
     }
     user.activeLibrary = requestedLibrary;
     let libraryData = await Library.findById(user.activeLibrary)
-        .populate({
-            path: "sections",
-            populate: {
-                path: "books",
-                select: [
-                    "title",
-                    "author",
-                    "subtitle",
-                    "tags",
-                ]
-            }
-        })
+        //.populate({
+        //    path: "sections",
+        //    populate: {
+        //        path: "books",
+        //        select: [
+        //            "title",
+        //            "author",
+        //            "subtitle",
+        //            "tags",
+        //        ]
+        //    }
+        //})
         .populate({
             path: "books",
             select: [
@@ -94,7 +94,7 @@ async function createLibrary(req, res) {
         name: name,
         description: description,
         books: [],
-        sections: []
+        //sections: []
     })
     .then((result) => {
         user.activeLibrary = result.id;
