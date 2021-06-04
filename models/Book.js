@@ -9,14 +9,12 @@ const bookSchema = new mongoose.Schema({
     },
     subtitle: {
         type: String,
-        minLength: 1,
         maxLength: 60,
         default: "",
         required: false
     },
     description: {
         type: String,
-        minLength: 1,
         maxLength: 5000,
         default: "",
         required: false
@@ -35,9 +33,8 @@ const bookSchema = new mongoose.Schema({
             required: false
         }
     ],
-    type: {
+    bookType: {
         type: String,
-        minLength: 3,
         maxLength: 60,
         default: "",
         required: false
@@ -48,7 +45,7 @@ const bookSchema = new mongoose.Schema({
     tags: [
         {
             type: String, 
-            minLength: 2,
+            minLength: 1,
             maxLength: 30,
             required: false,
         }
