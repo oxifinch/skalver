@@ -19,7 +19,7 @@ async function createBook(req, res) {
         subtitle,
         description,
         author,
-        type
+        type,
     } = req.body;
     Book.create({
         title,
@@ -46,7 +46,8 @@ async function createBook(req, res) {
                 });
             });
     })
-    .catch(() => {
+    .catch((err) => {
+        console.log(err);
         return res.status(500).render("pages/error", {
             message: "The book could not be created.",
             status: "500 - Internal server error."

@@ -11,18 +11,21 @@ const bookSchema = new mongoose.Schema({
         type: String,
         minLength: 1,
         maxLength: 60,
+        default: "",
         required: false
     },
     description: {
         type: String,
         minLength: 1,
         maxLength: 5000,
+        default: "",
         required: false
     },
     author: {
         type: String,
         minLength: 1,
         maxLength: 60,
+        default: "Unknown Author",
         required: false
     },
     coauthors: [
@@ -35,7 +38,8 @@ const bookSchema = new mongoose.Schema({
     type: {
         type: String,
         minLength: 3,
-        maxLength: 30,
+        maxLength: 60,
+        default: "",
         required: false
     },
     chapters: [
