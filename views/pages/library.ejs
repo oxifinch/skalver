@@ -3,18 +3,17 @@
 	<head>
 		<meta charset="utf-8" />
         <title>Skalver | <%= library.name %></title>
-		<meta name="description" content="Dashboard of Skalver web app"/>
+		<meta name="description" content="Library view of the Skalver web app"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="/css/style.css">
 	</head>
 
 	<body id="page_container_library" class="d-flex flex-column vh-100">
-        <%- include ("../partials/library-createbook.ejs") %>
+        <%- include ("../partials/library-modal-createbook.ejs") %>
         <%- include ("../partials/library-header.ejs") %>
-        <main id="library_browse_container" class="container flex-grow-1 p-1
-            my-2 rounded">
-            <% library.sections.forEach((section) => { %>
-                <%- include("../partials/library-browse-section.ejs", {section: section})%>
+        <main id="library_browse_container" class="container flex-grow-1 p-1 my-2 rounded">
+            <% library.books.forEach((book) => { %>
+                <%- include("../partials/library-book-listitem.ejs", {book: book})%>
             <% }); %>
         </main>
         <footer id="library_footer" class="row w-100 m-0">
@@ -23,7 +22,6 @@
             </div>
             <div class="col-3">
                 <div class="d-flex flex-column">
-                    <button class="btn btn-success">Create New Section</button>
                     <button data-bs-toggle="modal" data-bs-target="#library_createbook_modal" id="button_create_new_book" class="btn btn-success w-100">Create New Book</button>
                 </div>
             </div>

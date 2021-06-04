@@ -12,9 +12,9 @@ const librarySchema = new mongoose.Schema({
         maxLength: 5000,
         required: true
     },
-    sections: [
-        {type: mongoose.Types.ObjectId, ref: "section"}
-    ],
+    //sections: [
+    //    {type: mongoose.Types.ObjectId, ref: "section"}
+    //],
     books: [
         {type: mongoose.Types.ObjectId, ref: "book"}
     ]
