@@ -4,13 +4,14 @@ import Library from "../models/Library.js";
 import User from "../models/User.js";
 
 async function createBook(req, res) {
+    // TODO: Implement validation function
     if(!req.session.userName || !req.session.userId) {
         return res.redirect("/");
     }
     const user = await User.findById(req.session.userId);
     if(!user) {
         return res.status(404).render("pages/error", {
-            message: "You user account could not be located.",
+            message: "Your user account could not be located.",
             status: "404 - Not found."
         });
     }
@@ -86,4 +87,74 @@ async function createBook(req, res) {
     })
 }
 
-export default {createBook};
+async function deleteBook(req, res) {
+    if(!req.session.userName || !req.session.userId) {
+        return res.redirect("/");
+    }
+    const user = await User.findById(req.session.userId);
+    if(!user) {
+        return res.status(404).render("pages/error", {
+            message: "Your user account could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    const parentLibrary = await Library.findById(user.activeLibrary);
+    if(!parentLibrary) {
+        return res.status(404).render("pages/error", {
+            message: "Your active library could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    let targetId;
+    for(let i = 0; i < parentLibrary.books.length; i++) {
+        const currentItem = parentLibrary.books[i].toString().trim();
+        if(currentItem === req.params.bookId.toString().trim()) {
+            targetId = parentLibrary.books[i];
+        }
+    }
+    if(!targetId) {
+        return res.status(404).render("pages/error", {
+            message: "The book you are trying to delete could not be found in the library.",
+            status: "404 - Not found."
+        });
+    }
+    const parentBook = await Book.findById(targetId);
+    if(!parentBook) {
+        return res.status(404).render("pages/error", {
+            message: "The book you are trying to delete could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    // TODO: There is probably a smoother way to do this using MongoDB queries.
+    for(let i = 0; i < parentBook.chapters.length; i++) {
+        await Chapter.findByIdAndDelete(parentBook.chapters[i]);
+    }
+    // TODO: User should be prompted for confirmation before they are allowed to
+    // delete anything.
+    Book.findByIdAndDelete(targetId)
+        .then((result) => {
+            console.log("[ DEBUG ] Deleted book: ");
+            console.log(result);
+            parentLibrary.books.pull(targetId);
+            parentLibrary.save()
+                .then((result) => {
+                    console.log("[ DEBUG ] Pulled book from library. Result: ");
+                    console.log(result);
+                })
+                .catch((err) => {
+                    console.log("[ DEBUG ] Failed to pull book. Error: ");
+                    console.log(err);
+                });
+
+        })
+        .catch((err) => {
+            console.log("[ DEBUG ] Book failed to delete. Error: ");
+            console.log(err);
+            return res.status(500).render("pages/error", {
+                message: "The book could not be deleted.",
+                status: "500 - Internal server error."
+            });
+        });
+}
+
+export default {createBook, deleteBook};
