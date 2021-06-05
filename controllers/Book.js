@@ -88,6 +88,7 @@ async function createBook(req, res) {
 }
 
 async function deleteBook(req, res) {
+    // TODO: Implement validation function
     if(!req.session.userName || !req.session.userId) {
         return res.redirect("/");
     }
@@ -157,4 +158,98 @@ async function deleteBook(req, res) {
         });
 }
 
-export default {createBook, deleteBook};
+async function editBook(req, res) {
+    // TODO: Implement validation function
+    if(!req.session.userName || !req.session.userId) {
+        return res.redirect("/");
+    }
+    const user = await User.findById(req.session.userId);
+    if(!user) {
+        return res.status(404).render("pages/error", {
+            message: "Your user account could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    // ---------------------------------
+    // TODO: This whole section could be condensed. Library, user ownership and
+    // that the book exists in the library SHOULD be confirmed before changing
+    // anything, but this is overly verbose and error prone.
+    const parentLibrary = await Library.findById(user.activeLibrary);
+    if(!parentLibrary) {
+        return res.status(404).render("pages/error", {
+            message: "Your active library could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    let targetId;
+    for(let i = 0; i < parentLibrary.books.length; i++) {
+        const currentItem = parentLibrary.books[i].toString().trim();
+        if(currentItem === req.params.bookId.toString().trim()) {
+            targetId = parentLibrary.books[i];
+        }
+    }
+    if(!targetId) {
+        return res.status(404).render("pages/error", {
+            message: "The book you are trying to edit could not be found in the library.",
+            status: "404 - Not found."
+        });
+    }
+    const parentBook = await Book.findById(targetId);
+    if(!parentBook) {
+        return res.status(404).render("pages/error", {
+            message: "The book you are trying to edit could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    console.log(" [ DEBUG ] Editing book: ");
+    console.log(parentBook);
+    // ---------------------------------
+    let {
+        newTitle,
+        newSubtitle,
+        newDescription,
+        newAuthor, 
+        newBookType,
+        newCoauthors
+    } = req.body;
+    if(!newTitle) {
+        newTitle = parentBook.title;
+    }
+    if(!newSubtitle) {
+        newSubtitle = parentBook.subtitle;
+    }
+    if(!newDescription) {
+        newDescription = parentBook.description;
+    }
+    if(!newAuthor) {
+        newAuthor = parentBook.author;
+    }
+    if(!newBookType) {
+        newBookType = parentBook.bookType;
+    }
+    if(!newCoauthors) {
+        newCoauthors = parentBook.coauthors;
+    }
+    parentBook.title = newTitle;
+    parentBook.subtitle = newSubtitle;
+    parentBook.description = newDescription;
+    parentBook.author = newAuthor;
+    parentBook.bookType = newBookType;
+    parentBook.coauthors = newCoauthors;
+    console.log(" [ DEBUG ] Book after changes: ");
+    console.log(parentBook);
+    parentBook.save()
+        .then(() => {
+            res.status(200).redirect(`/read/${parentBook.id}`);
+        })
+        .catch((err) => {
+            console.log("[ DEBUG ] Error when updating book info: ");
+            console.log(err);
+            res.status(500).render("pages/error", {
+                message: "The book information could not be updated.",
+                status: "500 - Internal server error."
+            });
+        })
+}
+
+export default {createBook, deleteBook, editBook};

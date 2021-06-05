@@ -9,22 +9,22 @@ async function readChapter(req, res) {
         chapterQuery = 0;
     }
     try {
-        let bookData = await Book.findById(bookQuery)
-            .select([
-                "title",
-                "author",
-                "chapters"
-            ])
-            .exec();
-        let chapterId = bookData.chapters[chapterQuery];  
+        let parentBook = await Book.findById(bookQuery);
+        if(!parentBook) {
+            res.status(404).render("pages/error", {
+                message: "Sorry, the book could not be located.",
+                status: "404 - Not found."
+            });
+        }
+        let chapterId = parentBook.chapters[chapterQuery];  
         if(!chapterId) {
             // TODO: Should include a message that says the requested chapter
             // wasn't found and user is redirected to book index
-            chapterId = bookData.chapters[0];
+            chapterId = parentBook.chapters[0];
         }
         let chapterNumber;
-        for(let i = 0; i < bookData.chapters.length; i++) {
-            if(bookData.chapters[i] === chapterId) {
+        for(let i = 0; i < parentBook.chapters.length; i++) {
+            if(parentBook.chapters[i] === chapterId) {
                 chapterNumber = i;
                 break;
             }
@@ -35,12 +35,12 @@ async function readChapter(req, res) {
             let chapterData = await Chapter.findById(chapterId);
             let htmlOutput = mdparser.parse_markdown(chapterData.markdown);
             res.status(200).render("pages/read", {
-                book: bookData,
+                book: parentBook,
                 chapter: chapterData,
                 htmlOutput: htmlOutput,
                 chapterNumber: chapterNumber,
-                nextChapter: `/read/${bookData.id}?chapter=${nextQuery}`,
-                prevChapter: `/read/${bookData.id}?chapter=${prevQuery}`,
+                nextChapter: `/read/${parentBook.id}?chapter=${nextQuery}`,
+                prevChapter: `/read/${parentBook.id}?chapter=${prevQuery}`,
             });
 
         } catch {
@@ -52,7 +52,7 @@ async function readChapter(req, res) {
     } catch {
         res.status(404).render("pages/error", {
             message: "Sorry, the resource you requested could not be located.",
-            status: "404 - Resource not found."
+            status: "404 - Not found."
         });
     }
 }
@@ -62,7 +62,7 @@ async function updateChapter(req, res) {
     if(!chapter) {
         res.status(404).render("pages/error", {
             message: "Sorry, the chapter could not be updated.",
-            status: "404 - Resource not found."
+            status: "404 - Not found."
         });
     }
     let newMarkdown = req.body.markdown;
