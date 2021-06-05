@@ -1,0 +1,35 @@
+<div id="read_createchapter_modal" class="modal">
+    <div class="modal-dialog border border-secondary rounded">
+        <div class="modal-content bg-dark">
+            <div class="modal-header text-light">
+                <h3 class="modal-title">Create New Chapter</h3>
+            </div>
+            <div class="modal-body text-light">
+                <form action="/chapter/create/<%=book.id%>" method="POST">
+                    <div class="mb-3">
+                        <label for="create_chapter_name" class="form-label">Chapter Name</label>
+                        <input type="text" name="name" class="form-control" id="edit_book_title" value="<%=book.title%>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_book_subtitle" class="form-label" >Subtitle</label>
+                        <input type="text" name="newSubtitle" class="form-control" id="edit_book_subtitle" value="<%=book.subtitle%>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_book_description" class="form-label">Description</label>
+                        <textarea name="newDescription" class="form-control" rows="6" id="edit_library_description" style="resize: none;"><%=book.description%></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_book_author" class="form-label">Author</label>
+                        <input type="text" name="newAuthor" class="form-control" id="edit_book_author" value="<%=book.author%>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_book_type" class="form-label">Type</label>
+                        <input type="text" name="newBookType" class="form-control" id="edit_book_type" value="<%=book.bookType%>">
+                    </div>
+                    <p class="text-secondary">Under construction: Co-authors</p>
+                    <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
