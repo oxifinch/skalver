@@ -11,18 +11,11 @@ saveButton.addEventListener("click", () => {
 const openEditorContainer = document.querySelector("#editor_closed");
 const openEditorButton = document.querySelector("#reader_openEditor");
 openEditorButton.addEventListener("click", () => {
-    openEditorContainer.classList.toggle("hidden");
-    closeEditorContainer.classList.toggle("hidden");
-    closeEditorContainer.classList.toggle("d-flex");
     toggleEditor();
 });
 const closeEditorContainer = document.querySelector("#editor_open");
 const closeEditorButton = document.querySelector("#reader_closeEditor");
 closeEditorButton.addEventListener("click", () => {
-    openEditorContainer.classList.toggle("hidden");
-    closeEditorContainer.classList.toggle("hidden");
-    closeEditorContainer.classList.toggle("d-flex");
-    editorArea.value = activeChapter.markdown;
     toggleEditor();
 });
 const createNewButton = document.querySelector("#reader_createchapter");
@@ -33,6 +26,10 @@ createNewButton.addEventListener("click", () => {
 function toggleEditor() {
     pageContent.classList.toggle("hidden"); 
     pageMarkdown.classList.toggle("hidden"); 
+    openEditorContainer.classList.toggle("hidden");
+    closeEditorContainer.classList.toggle("hidden");
+    closeEditorContainer.classList.toggle("d-flex");
+    editorArea.value = activeChapter.markdown;
 }
 
 function toggleNewWindow() {
@@ -53,6 +50,7 @@ function saveMarkdown() {
     })
     .then(res => res.json())
     .then(data => {
+        toggleEditor();
         activeChapter.markdown = data.markdown;
         editorArea.value = data.markdown;
         pageContent.innerHTML = data.htmlOutput;
