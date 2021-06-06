@@ -16,39 +16,15 @@
         </style>
 	</head>
 
-	<body>
+	<body id="page_container_reader">
         <%- include ("../partials/read-modal-editbook.ejs", {book: book}) %>
-        <header>
-            <a href="/library">Go Back</a>
-            <p><%= book.title %> by <%= book.author %> | <%= chapterNumber+1 %>/<%= book.chapters.length %>: <%= chapter.name %></p>
 
-            <button data-bs-toggle="modal" data-bs-target="#read_editbook_modal" id="button_edit_book" class="btn btn-success w-100">Edit Book Info</button>
-        </header>
-        <div id="new_chapter_window" class="hidden ">
-            <h2>Create New Chapter</h2> 
-            <form action="/chapter/create/<%=book.id%>" method="POST">
-                <h4>Name</h4>
-                <input type="text" name="name" id="editor_new_name">
-                <textarea name="markdown" id="editor_new_markdown" cols="60" rows="20"></textarea>
-                <button type="submit">Create</button>
-            </form>
+        <div id="page_wrapper_reader" class="container-fluid p-0 d-flex flex-column vh-100 justify-content-between overflow-hidden">
+            <%- include("../partials/read-header.ejs", {book: book}) %>
+            <%- include("../partials/read-viewport.ejs", {htmlOutput: htmlOutput, nextChapter: nextChapter, prevChapter: prevChapter}) %>
+            <%- include("../partials/read-footer.ejs") %>
         </div>
-        <button id="new_chapter_button" class="btn btn-primary">Create New Chapter</button>
-        <main>
-            <button id="reader_edit">Edit</button>
-            <button id="reader_save">Save Changes</button>
-            <div id="reader_page" style="width: 60rem; margin: auto; border: 2px solid black; padding: 1rem;">
-                <div id="reader_page_content">
-                    <%- htmlOutput %>
-                </div>
-                <div id="reader_page_markdown" class="hidden">
-                    <textarea id="reader_editor_textarea" cols="80" rows="40" style="resize: none">
-                    </textarea>
-                </div>
-            </div>
-        </main>
-        <a href="<%= prevChapter %>">Prev</a>
-        <a href="<%= nextChapter %>">Next</a>
+        <div id="cover_reader" class="fixed-top vh-100 vw-100"></div>
         <script>
             let activeChapter = <%- JSON.stringify(chapter) %>
             let parentBook = <%- JSON.stringify(book) %>

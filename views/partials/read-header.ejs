@@ -1,0 +1,11 @@
+<header class="row bg-dark text-light p-1">
+    <div class="col-1">
+        <a href="/library" class="btn btn-outline-warning">Back</a>     
+    </div>
+    <div class="col-10">
+        <p class="mb-0"><%= book.title %> by <%= book.author %> | <%= chapterNumber+1 %>/<%= book.chapters.length %>: <%= chapter.name %></p>
+    </div>
+    <div class="col-1">
+        <button data-bs-toggle="modal" data-bs-target="#read_editbook_modal" id="button_edit_book" class="btn btn-success">Edit Book Info</button>
+    </div>
+</header>
