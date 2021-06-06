@@ -10781,10 +10781,6 @@ textarea.form-control-lg {
   z-index: -1;
 }
 
-.hidden {
-  display: none;
-}
-
 #page_container_dashboard {
   background-image: url("https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
 }
@@ -10816,6 +10812,11 @@ textarea.form-control-lg {
 
 #library_footer {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+  display: none;
+  background-color: green;
 }
 
 /*# sourceMappingURL=style.css.map */
