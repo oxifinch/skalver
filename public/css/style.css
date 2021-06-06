@@ -10765,14 +10765,34 @@ textarea.form-control-lg {
 #reader_page {
   background-color: #e8e8e8;
   max-height: 100%;
-  overflow-y: scroll;
+  height: 100%;
 }
 
 #reader_page_content {
+  overflow-y: scroll;
+  max-height: 100%;
+  height: 100%;
   font-family: "EB Garamond", serif;
 }
 #reader_page_content p {
   font-size: 1.1rem;
+}
+
+#reader_page_markdown {
+  font-family: "Montserrat";
+  position: relative;
+  padding: 0;
+}
+#reader_page_markdown textarea {
+  position: absolute;
+  overflow-x: hidden;
+  background: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  border: none;
 }
 
 #cover_reader {
