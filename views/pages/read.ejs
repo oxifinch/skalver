@@ -16,22 +16,14 @@
         </style>
 	</head>
 
-	<body id="page_container_reader" class="container-fluid d-flex flex-column vh-100">
+	<body id="page_container_reader">
         <%- include ("../partials/read-modal-editbook.ejs", {book: book}) %>
-        <%- include ("../partials/read-header.ejs", {book: book}) %>
-        <!-- TODO: Replace this janky form with an actual modal -->
-        <div id="new_chapter_window" class="hidden ">
-            <h2>Create New Chapter</h2> 
-            <form action="/chapter/create/<%=book.id%>" method="POST">
-                <h4>Name</h4>
-                <input type="text" name="name" id="editor_new_name">
-                <textarea name="markdown" id="editor_new_markdown" cols="60" rows="20"></textarea>
-                <button type="submit">Create</button>
-            </form>
+
+        <div id="page_wrapper_reader" class="container-fluid p-0 d-flex flex-column vh-100 justify-content-between overflow-hidden">
+            <%- include("../partials/read-header.ejs", {book: book}) %>
+            <%- include("../partials/read-viewport.ejs", {htmlOutput: htmlOutput, nextChapter: nextChapter, prevChapter: prevChapter}) %>
+            <%- include("../partials/read-footer.ejs") %>
         </div>
-        <button id="new_chapter_button" class="btn btn-primary" style="display: none">Create New Chapter</button>
-        <!--  -->
-        <%- include ("../partials/read-viewport.ejs", {htmlOutput: htmlOutput, nextChapter: nextChapter, prevChapter: prevChapter}) %>
         <div id="cover_reader" class="fixed-top vh-100 vw-100"></div>
         <script>
             let activeChapter = <%- JSON.stringify(chapter) %>

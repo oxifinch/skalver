@@ -1,22 +1,17 @@
-<main id="reader_viewport" class="container border border-danger mt-4 mb-4 flex-grow-1 p-3">
-    <div class="row h-100 justify-content-center">
-        <div class="col-1 d-flex flex-column justify-content-end">
-            <p>CHAPTER LIST</p>
-            <a href="<%= prevChapter %>"class="btn btn-primary mb-5">Prev</a>
+<main id="reader_viewport" class="align-self-center justify-content-center align-items-center row w-100 py-2">
+    <div class="col-1">
+        <a href="<%= prevChapter %>"class="btn btn-primary w-100">Prev</a>
+    </div>
+    <div id="reader_page" class="col-4 p-3 rounded">
+        <div id="reader_page_content">
+            <%- htmlOutput %>
         </div>
-        <div id="reader_page" class="col-6 border border-dark p-4">
-            <div id="reader_page_content">
-                <%- htmlOutput %>
-            </div>
-            <div id="reader_page_markdown" class="hidden">
-                <textarea id="reader_editor_textarea" cols="80" rows="40" style="resize: none">
-                </textarea>
-            </div>
-        </div>
-        <div class="col-1 d-flex flex-column justify-content-end">
-            <a href="<%= nextChapter %>" class="btn btn-primary mb-5">Next</a>
+        <div id="reader_page_markdown" class="hidden">
+            <textarea id="reader_editor_textarea" style="resize: none">
+            </textarea>
         </div>
     </div>
-    <button id="reader_edit">Edit</button>
-    <button id="reader_save">Save Changes</button>
+    <div class="col-1">
+        <a href="<%= nextChapter %>" class="btn btn-primary w-100">Next</a>
+    </div>
 </main>
