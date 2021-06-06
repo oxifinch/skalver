@@ -8,11 +8,17 @@ const saveButton = document.querySelector("#reader_save");
 saveButton.addEventListener("click", () => {
     saveMarkdown();
 });
-const editButton = document.querySelector("#reader_edit");
-editButton.addEventListener("click", () => {
+const openEditorContainer = document.querySelector("#editor_closed");
+const openEditorButton = document.querySelector("#reader_openEditor");
+openEditorButton.addEventListener("click", () => {
     toggleEditor();
 });
-const createNewButton = document.querySelector("#new_chapter_button");
+const closeEditorContainer = document.querySelector("#editor_open");
+const closeEditorButton = document.querySelector("#reader_closeEditor");
+closeEditorButton.addEventListener("click", () => {
+    toggleEditor();
+});
+const createNewButton = document.querySelector("#reader_createchapter");
 createNewButton.addEventListener("click", () => {
     toggleNewWindow();
 })
@@ -20,6 +26,10 @@ createNewButton.addEventListener("click", () => {
 function toggleEditor() {
     pageContent.classList.toggle("hidden"); 
     pageMarkdown.classList.toggle("hidden"); 
+    openEditorContainer.classList.toggle("hidden");
+    closeEditorContainer.classList.toggle("hidden");
+    closeEditorContainer.classList.toggle("d-flex");
+    editorArea.value = activeChapter.markdown;
 }
 
 function toggleNewWindow() {
@@ -39,10 +49,11 @@ function saveMarkdown() {
         }
     })
     .then(res => res.json())
-    .then(json => {
-        console.log(json);
-        // TODO: Populate page with new html instead of reloading
-        location.reload();
+    .then(data => {
+        toggleEditor();
+        activeChapter.markdown = data.markdown;
+        editorArea.value = data.markdown;
+        pageContent.innerHTML = data.htmlOutput;
     })
     .catch(err => console.log(err));
 }

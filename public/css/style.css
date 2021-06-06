@@ -10765,24 +10765,63 @@ textarea.form-control-lg {
 #reader_page {
   background-color: #e8e8e8;
   max-height: 100%;
-  overflow-y: scroll;
+  height: 100%;
 }
 
 #reader_page_content {
+  overflow-y: scroll;
+  max-height: 100%;
+  height: 100%;
   font-family: "EB Garamond", serif;
 }
 #reader_page_content p {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+}
+#reader_page_content h1, #reader_page_content .h1, #reader_page_content h2, #reader_page_content .h2, #reader_page_content h3, #reader_page_content .h3, #reader_page_content h4, #reader_page_content .h4, #reader_page_content h5, #reader_page_content .h5, #reader_page_content h6, #reader_page_content .h6 {
+  text-align: center;
+}
+#reader_page_content blockquote {
+  border-left: 2px solid darkgray;
+  text-align: left;
+  padding: 1rem 1.5rem;
+}
+#reader_page_content span {
+  background-color: rgba(183, 170, 145, 0.25);
+}
+#reader_page_content div {
+  padding: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  background-color: rgba(183, 170, 145, 0.25);
+  font-family: "Montserrat";
+  font-size: 0.9rem;
+}
+#reader_page_content ul {
+  list-style-type: square;
+}
+
+#reader_page_markdown {
+  font-family: "Montserrat";
+  position: relative;
+  padding: 0;
+}
+#reader_page_markdown textarea {
+  position: absolute;
+  overflow-x: hidden;
+  background: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  border: none;
+  font-size: 0.9rem;
 }
 
 #cover_reader {
   background-color: rgba(0, 0, 0, 0.7);
   box-shadow: 0 0 24px 24px black inset;
   z-index: -1;
-}
-
-.hidden {
-  display: none;
 }
 
 #page_container_dashboard {
@@ -10816,6 +10855,11 @@ textarea.form-control-lg {
 
 #library_footer {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+  display: none;
+  background-color: green;
 }
 
 /*# sourceMappingURL=style.css.map */

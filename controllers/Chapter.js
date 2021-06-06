@@ -75,8 +75,11 @@ async function updateChapter(req, res) {
     chapter.markdown = newMarkdown.toString();
     chapter.save()
         .then((result) => {
-            console.log(`[ DEBUG ] ${result}`);
-            res.status(200).json(result);
+            const htmlOutput = mdparser.parse_markdown(result.markdown);
+            res.status(200).json({
+                markdown: result.markdown,
+                htmlOutput: htmlOutput
+            });
         })
         .catch((err) => {
             console.log(`[ DEBUG ] ${err}`);
