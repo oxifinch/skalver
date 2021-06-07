@@ -4,15 +4,16 @@ const pageContent = document.querySelector("#reader_page_content");
 const pageMarkdown = document.querySelector("#reader_page_markdown");
 const editorArea = document.querySelector("#reader_editor_textarea");
 editorArea.value = activeChapter.markdown;
-//const saveButton = document.querySelector("#reader_save");
-//saveButton.addEventListener("click", () => {
-//    saveMarkdown();
-//});
+const saveButton = document.querySelector("#editor_save");
+saveButton.addEventListener("click", () => {
+    saveMarkdown();
+});
 const sidePanel = document.querySelector("#reader_sidepanel");
 sidePanel.addEventListener("click", () => {
     sidePanel.classList.toggle("closed");
 })
-const toggleEditorButton = document.querySelector("#reader_openEditor");
+const toggleEditorButtonIcon = document.querySelector("#editor_toggle_icon");
+const toggleEditorButton = document.querySelector("#editor_toggle");
 toggleEditorButton.addEventListener("click", () => {
     toggleEditor();
 });
@@ -20,9 +21,9 @@ toggleEditorButton.addEventListener("click", () => {
 function toggleEditor() {
     pageContent.classList.toggle("hidden"); 
     pageMarkdown.classList.toggle("hidden"); 
-    openEditorContainer.classList.toggle("hidden");
-    closeEditorContainer.classList.toggle("hidden");
-    closeEditorContainer.classList.toggle("d-flex");
+    toggleEditorButtonIcon.classList.toggle("bi-pencil-square");
+    toggleEditorButtonIcon.classList.toggle("bi-x-square");
+    saveButton.classList.toggle("hidden");
     editorArea.value = activeChapter.markdown;
 }
 

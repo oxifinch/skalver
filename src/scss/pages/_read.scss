@@ -138,30 +138,41 @@
     }
 }
 
-#reader_button_openeditor {
+#editor_buttongroup {
     position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
     right: 0;
     bottom: 0;
-    background-color: rgba(#000000, 0.5);
-    border: 1px solid rgba(#ffffff, 0.5);
     margin: 2.5rem;
-    border-radius: 50%;
-    width: 4.5rem;
-    height: 4.5rem;
-    text-align: center;
-    font-size: 2rem;
-    i {
-        color: white;
-        transition: 0.15s;
-    }
-    &:hover {
+
+    #editor_toggle {
+        background-color: rgba(#000000, 0.5);
+        border: 1px solid rgba(#ffffff, 0.5);
+        border-radius: 50%;
+        width: 4.5rem;
+        height: 4.5rem;
+        text-align: center;
+        font-size: 2rem;
         i {
-            color: darkgray;
+            color: white;
             transition: 0.15s;
         }
+        &:hover {
+            i {
+                color: darkgray;
+                transition: 0.15s;
+            }
+        }
+    }
+
+    #editor_save {
+        white-space: nowrap;
+        margin-right: 1.4rem;
     }
 }
-
 
 #cover_reader {
     background-color: rgba(#000000, 0.7);

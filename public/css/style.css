@@ -10885,26 +10885,36 @@ textarea.form-control-lg {
   transition: 0.15s;
 }
 
-#reader_button_openeditor {
+#editor_buttongroup {
   position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
   right: 0;
   bottom: 0;
+  margin: 2.5rem;
+}
+#editor_buttongroup #editor_toggle {
   background-color: rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.5);
-  margin: 2.5rem;
   border-radius: 50%;
   width: 4.5rem;
   height: 4.5rem;
   text-align: center;
   font-size: 2rem;
 }
-#reader_button_openeditor i {
+#editor_buttongroup #editor_toggle i {
   color: white;
   transition: 0.15s;
 }
-#reader_button_openeditor:hover i {
+#editor_buttongroup #editor_toggle:hover i {
   color: darkgray;
   transition: 0.15s;
+}
+#editor_buttongroup #editor_save {
+  white-space: nowrap;
+  margin-right: 1.4rem;
 }
 
 #cover_reader {

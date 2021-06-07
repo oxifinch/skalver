@@ -15,9 +15,12 @@
         <div id="reader_viewport_container d-flex">
             <%- include("../partials/read-viewport.ejs", {book: book}) %>
         </div>
-        <button id="reader_button_openeditor">
-            <i class="bi bi-pencil-square"></i>
-        </button>
+        <div id="editor_buttongroup">
+            <button id="editor_save" class="btn btn-success hidden">Save</button>
+            <button id="editor_toggle">
+                <i id="editor_toggle_icon" class="bi bi-pencil-square"></i>
+            </button>
+        </div>
 
         <div id="cover_reader" class="fixed-top vh-100 vw-100"></div>
         <script>
