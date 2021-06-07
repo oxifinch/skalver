@@ -3,59 +3,106 @@
 }
 
 #reader_sidepanel {
+    z-index: 2;
+    border: 1px solid red;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 25%;
-    height: 100%;
-    overflow-y: auto;
-    background-color: green;
-    white-space: nowrap;
-    &.closed {
-        width: 0px;
-        transition: 0.25s;
-    }
-    transition: 0.25s;
-    #reader_sidepanel_togglebutton {
-        position: relative;
-        left: 0;
-        top: 0;
-        border: 1px solid orange;
-    }
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 
-    #reader_sidepanel_title {
-        background-color: black;
-        border-radius: 8px;
-        padding: 0.3rem;    
-        hr {
-            margin: 1rem 3rem;
+    #sidepanel_body {
+        background-color: #444444;
+        height: 100vh;
+        width: 90%;
+        border-bottom-right-radius: 0.6rem;
+        border-top-right-radius: 0.6rem;
+        padding: 1rem;
+
+        #sidepanel_title {
+            padding: 0.6rem;
+            hr {
+                margin: 0.2rem 1rem;
+            }
+            h1, h2 {
+                font-family: "EB Garamond";
+            }
+            #title_author {
+                font-family: "Montserrat";
+            }
         }
-        h1, h2 {
-            font-family: "EB Garamond";
-        }
-        h5 {
+
+        #sidepanel_bookstats {
+            padding: 0.6rem;
             font-family: "Montserrat";
+            hr {
+                margin: 0.2rem 0.3rem;
+            }
+            .bookstats_coauthor {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                p {
+                    flex: 5;
+                    padding-left: 0.5rem;
+                }
+                button {
+                    display: none;
+                    flex: 1;
+                    text-align: center;
+                    background: none;
+                    border: none;
+                    i {
+                        color: rgba(indianred, 0);
+                    }
+                }
+                &:hover {
+                    button {
+                        display: inline-block;
+                        i {
+                            color: indianred;
+                        }
+                    }
+                }
+            }
+
+            #bookstats_coauthor_createnew {
+                i {
+                    color: white;
+                    font-size: 1.3rem;
+                }
+            }
+        }
+
+        #sidepanel_separator {
+            color: white;
         }
     }
 
-    #reader_sidepanel_booktype {
-        background-color: black;
-        border-radius: 8px;
-        h3 {
-            font-family: "Montserrat";
+    #sidepanel_button_toggle {
+        text-align: center;
+        background-color: #444444;
+        border: none;
+        border-bottom-right-radius: 50%;
+        border-top-right-radius: 50%;
+        padding-left: 0;
+        font-size: 1.6rem;
+        transition: 0.15s;
+        i {
+            color: white;
         }
-    }
-
-    #reader_sidepanel_coauthors {
-        background-color: black;
-        border-radius: 8px;
-        font-family: "Montserrat";
-    }
-
-    #reader_sidepanel_chapterlist {
-        background-color: black;
-        border-radius: 8px;
-        font-family: "Montserrat";
-    }
+        &:hover {
+            i {
+                color: darkgray;
+                transition: 0.15s;
+            }
+        }
+    } 
 }
 
+// ----------------------
 #reader_viewport {
     overflow-y: hidden;
     position: fixed;

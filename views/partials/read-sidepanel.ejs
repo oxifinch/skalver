@@ -1,48 +1,41 @@
-<div id="reader_sidepanel" class="closed fixed-top">
-    <div class="h-100 d-flex flex-column bg-dark text-light justify-content-start p-2">
-        <div id="reader_sidepanel_title">
+<div id="reader_sidepanel">
+    <div id="sidepanel_body">
+        <div id="sidepanel_title" class="bg-dark text-light text-center my-1 rounded">
             <hr>
-            <h1 class="h2 mb-0 text-center"><%=book.title%></h1>
-            <% if(book.subtitle || book.subtitle != "") { %>
-                   <h2 class="h4 mb-2 text-center"><%=book.subtitle%></h2>
+            <h1 class="h3 mb-1"><%=book.title%></h1>
+            <% if (book.subtitle) { %>
+            <h2 class="h4 mb-0"><%=book.subtitle%></h2>
             <% } %>
-            <h3 class="h5 text-center"><em>by <%=book.author%></em></h3>
+            <% if (book.author) { %>
+            <h3 id="title_author" class="h5 mb-0 mt-3 text-secondary"><em>by <%=book.author%></em></h3>
+            <% } %>
             <hr>
         </div>
-        <div id="reader_sidepanel_booktype" class="my-1">
-            <% if (book.bookType) { %>
-                   <h3 class="h5 my-1 text-center"><%=book.bookType%></h3>
-            <% } %>
-        </div>
-
-        <div id="reader_sidepanel_options" class="">
-            <button class="btn btn-primary">Edit Book Info</button>
-        </div>
-
-        <div id="reader_sidepanel_coauthors" class="p-2 my-1">
-            <h3 class="h5">Co-Authors</h3>
-            <% if (book.coauthors.length > 0) { %>
-                <ul>
-                <% book.coauthors.forEach((author) => { %>
-                    <li><%= author %></li>
-                <% }); %>
-                </ul>
+        <div id="sidepanel_bookstats" class="text-light bg-dark rounded">
+            <% if(book.bookType || book.bookType.trim() != "") { %>
+            <p class="mb-0">Category: <span class="span_booktype"><%=book.bookType%></span></p>
             <% } else { %>
-            <h4 class="h5 text-secondary mb-0">None</h4>
+            <p class="mb-0">Category: None</p>
             <% } %>
+            <p class="mb-0">Chapters: <span class="span_chaptercount"><%= book.chapters.length %></span></p>
+            <hr>
+            <p class="mb-0">Co-Authors: </p>
+            <%# book.coauthors.forEach((author) => { %>
+            <div class="mb-1 border border-secondary rounded bookstats_coauthor">
+                <p class="my-1">Author Name</p>   
+                <button>
+                    <i class="bi bi-trash"></i>
+                </button>
+            </div>
+            <button id="bookstats_coauthor_createnew" class="py-0 btn btn-outline-secondary w-100">
+                <i class="bi bi-plus-square"></i>
+            </button>
+            <%# }); %>
         </div>
-        <div id="reader_sidepanel_chapterlist" class="p-2 my-1 flex-grow-1">
-            <h4 class="h5">Chapters</h4>
-            <ol class="mx-0 py-2">
-            <% book.chapters.forEach((chapter) => { %>
-            <li data-chapterid="<%=chapter.id%>" class="p-1 bg-dark rounded">
-                <%=chapter.name%>
-                <i><a class="mx-3" href="/read/<%=book.id%>">Read</a></i>
-            </li>    
-            <% }); %>
-            <li id="chapterlist_addnew"><i>Add New</i></li>
-            </ol>
-        </div>
-        <button class="btn btn-success w-100">Create Chapter</button>
+        <button id="sidepanel_button_editbook" class="btn btn-primary w-100 my-1">Edit Book Info</button>
+        <hr id="sidepanel_separator" class="my-1">
     </div>
+    <button id="sidepanel_button_toggle">
+        <i class="bi bi-caret-right"></i>
+    </button>
 </div>

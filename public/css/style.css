@@ -10758,53 +10758,91 @@ textarea.form-control-lg {
 }
 
 #reader_sidepanel {
-  width: 25%;
-  height: 100%;
-  overflow-y: auto;
-  background-color: green;
-  white-space: nowrap;
-  transition: 0.25s;
-}
-#reader_sidepanel.closed {
-  width: 0px;
-  transition: 0.25s;
-}
-#reader_sidepanel #reader_sidepanel_togglebutton {
-  position: relative;
-  left: 0;
+  z-index: 2;
+  border: 1px solid red;
+  position: fixed;
   top: 0;
-  border: 1px solid orange;
+  left: 0;
+  width: 25%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
-#reader_sidepanel #reader_sidepanel_title {
-  background-color: black;
-  border-radius: 8px;
-  padding: 0.3rem;
+#reader_sidepanel #sidepanel_body {
+  background-color: #444444;
+  height: 100vh;
+  width: 90%;
+  border-bottom-right-radius: 0.6rem;
+  border-top-right-radius: 0.6rem;
+  padding: 1rem;
 }
-#reader_sidepanel #reader_sidepanel_title hr {
-  margin: 1rem 3rem;
+#reader_sidepanel #sidepanel_body #sidepanel_title {
+  padding: 0.6rem;
 }
-#reader_sidepanel #reader_sidepanel_title h1, #reader_sidepanel #reader_sidepanel_title .h1, #reader_sidepanel #reader_sidepanel_title h2, #reader_sidepanel #reader_sidepanel_title .h2 {
+#reader_sidepanel #sidepanel_body #sidepanel_title hr {
+  margin: 0.2rem 1rem;
+}
+#reader_sidepanel #sidepanel_body #sidepanel_title h1, #reader_sidepanel #sidepanel_body #sidepanel_title .h1, #reader_sidepanel #sidepanel_body #sidepanel_title h2, #reader_sidepanel #sidepanel_body #sidepanel_title .h2 {
   font-family: "EB Garamond";
 }
-#reader_sidepanel #reader_sidepanel_title h5, #reader_sidepanel #reader_sidepanel_title .h5 {
+#reader_sidepanel #sidepanel_body #sidepanel_title #title_author {
   font-family: "Montserrat";
 }
-#reader_sidepanel #reader_sidepanel_booktype {
-  background-color: black;
-  border-radius: 8px;
-}
-#reader_sidepanel #reader_sidepanel_booktype h3, #reader_sidepanel #reader_sidepanel_booktype .h3 {
+#reader_sidepanel #sidepanel_body #sidepanel_bookstats {
+  padding: 0.6rem;
   font-family: "Montserrat";
 }
-#reader_sidepanel #reader_sidepanel_coauthors {
-  background-color: black;
-  border-radius: 8px;
-  font-family: "Montserrat";
+#reader_sidepanel #sidepanel_body #sidepanel_bookstats hr {
+  margin: 0.2rem 0.3rem;
 }
-#reader_sidepanel #reader_sidepanel_chapterlist {
-  background-color: black;
-  border-radius: 8px;
-  font-family: "Montserrat";
+#reader_sidepanel #sidepanel_body #sidepanel_bookstats .bookstats_coauthor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#reader_sidepanel #sidepanel_body #sidepanel_bookstats .bookstats_coauthor p {
+  flex: 5;
+  padding-left: 0.5rem;
+}
+#reader_sidepanel #sidepanel_body #sidepanel_bookstats .bookstats_coauthor button {
+  display: none;
+  flex: 1;
+  text-align: center;
+  background: none;
+  border: none;
+}
+#reader_sidepanel #sidepanel_body #sidepanel_bookstats .bookstats_coauthor button i {
+  color: rgba(205, 92, 92, 0);
+}
+#reader_sidepanel #sidepanel_body #sidepanel_bookstats .bookstats_coauthor:hover button {
+  display: inline-block;
+}
+#reader_sidepanel #sidepanel_body #sidepanel_bookstats .bookstats_coauthor:hover button i {
+  color: indianred;
+}
+#reader_sidepanel #sidepanel_body #sidepanel_bookstats #bookstats_coauthor_createnew i {
+  color: white;
+  font-size: 1.3rem;
+}
+#reader_sidepanel #sidepanel_body #sidepanel_separator {
+  color: white;
+}
+#reader_sidepanel #sidepanel_button_toggle {
+  text-align: center;
+  background-color: #444444;
+  border: none;
+  border-bottom-right-radius: 50%;
+  border-top-right-radius: 50%;
+  padding-left: 0;
+  font-size: 1.6rem;
+  transition: 0.15s;
+}
+#reader_sidepanel #sidepanel_button_toggle i {
+  color: white;
+}
+#reader_sidepanel #sidepanel_button_toggle:hover i {
+  color: darkgray;
+  transition: 0.15s;
 }
 
 #reader_viewport {
