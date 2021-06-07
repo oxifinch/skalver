@@ -6,21 +6,63 @@
 		<meta name="description" content="Skalver reading page"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="/css/style.css">
-        <style>
-            #reader_page_markdown {
-                white-space: pre-wrap;
-            }
-        </style>
 	</head>
 
 	<body id="page_container_reader">
         <%- include ("../partials/read-modal-editbook.ejs", {book: book}) %>
 
-        <div id="page_wrapper_reader" class="container-fluid p-0 d-flex flex-column vh-100 justify-content-between overflow-hidden">
-            <%- include("../partials/read-header.ejs", {book: book}) %>
-            <%- include("../partials/read-viewport.ejs", {htmlOutput: htmlOutput, nextChapter: nextChapter, prevChapter: prevChapter}) %>
-            <%- include("../partials/read-footer.ejs") %>
+        <div id="reader_sidepanel" class="fixed-top">
+            <div class="h-100 d-flex flex-column bg-dark text-light justify-content-start p-2">
+                <div id="reader_sidepanel_title">
+                    <hr>
+                    <h1 class="h2 mb-0 text-center"><%=book.title%></h1>
+                    <% if(book.subtitle || book.subtitle != "") { %>
+                           <h2 class="h4 mb-2 text-center"><%=book.subtitle%></h2>
+                    <% } %>
+                    <h3 class="h5 text-center"><em>by <%=book.author%></em></h3>
+                    <hr>
+                </div>
+                <div id="reader_sidepanel_booktype" class="my-1">
+                    <% if (book.bookType) { %>
+                           <h3 class="h5 my-1 text-center"><%=book.bookType%></h3>
+                    <% } %>
+                </div>
+
+                <div id="reader_sidepanel_options" class="">
+                    <button class="btn btn-primary">Edit Book Info</button>
+                </div>
+
+                <div id="reader_sidepanel_coauthors" class="p-2 my-1">
+                    <h3 class="h5">Co-Authors</h3>
+                    <% if (book.coauthors.length > 0) { %>
+                        <ul>
+                        <% book.coauthors.forEach((author) => { %>
+                            <li><%= author %></li>
+                        <% }); %>
+                        </ul>
+                    <% } else { %>
+                    <h4 class="h5 text-secondary mb-0">None</h4>
+                    <% } %>
+                </div>
+                <div id="reader_sidepanel_chapterlist" class="p-2 my-1 flex-grow-1">
+                    <h4 class="h5">Chapters</h4>
+                    <ol class="mx-0 py-2">
+                    <% book.chapters.forEach((chapter) => { %>
+                    <li data-chapterid="<%=chapter.id%>" class="p-1 bg-dark rounded">
+                        <%=chapter.name%>
+                        <i><a class="mx-3" href="/read/<%=book.id%>">Read</a></i>
+                    </li>    
+                    <% }); %>
+                    <li id="chapterlist_addnew"><i>Add New</i></li>
+                    </ol>
+                </div>
+                <button class="btn btn-success w-100">Create Chapter</button>
+            </div>
         </div>
+        <div id="reader_viewport_container">
+            <%- include("../partials/read-viewport.ejs", {book: book}) %>
+        </div>
+
         <div id="cover_reader" class="fixed-top vh-100 vw-100"></div>
         <script>
             let activeChapter = <%- JSON.stringify(chapter) %>

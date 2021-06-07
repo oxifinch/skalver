@@ -1,8 +1,8 @@
-<main id="reader_viewport" class="align-self-center justify-content-center align-items-center row w-100 py-2">
-    <div class="col-1">
-        <a href="<%= prevChapter %>"class="btn btn-primary w-100">Prev</a>
+<main id="reader_viewport" class="d-flex">
+    <div class="reader_page_>
+        
     </div>
-    <div id="reader_page" class="col-4 p-3 rounded">
+    <div id="reader_page" class="p-3 rounded">
         <div id="reader_page_content">
             <%- htmlOutput %>
         </div>
@@ -10,8 +10,5 @@
             <textarea id="reader_editor_textarea">
             </textarea>
         </div>
-    </div>
-    <div class="col-1">
-        <a href="<%= nextChapter %>" class="btn btn-primary w-100">Next</a>
     </div>
 </main>
