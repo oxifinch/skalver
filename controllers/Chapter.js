@@ -9,7 +9,14 @@ async function readChapter(req, res) {
         chapterQuery = 0;
     }
     try {
-        let parentBook = await Book.findById(bookQuery);
+        let parentBook = await Book.findById(bookQuery)
+            .populate({
+                path: "chapters",
+                select: [
+                    "name"
+                ]
+            })
+            .exec();
         if(!parentBook) {
             res.status(404).render("pages/error", {
                 message: "Sorry, the book could not be located.",
