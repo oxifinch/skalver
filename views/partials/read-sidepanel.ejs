@@ -23,10 +23,10 @@
             <% } %>
             <p class="mb-0">Chapters: <span class="span_chaptercount"><%= book.chapters.length %></span></p>
             <hr>
-            <p class="mb-0">Co-Authors: </p>
+            <p class="mb-0">Co-Authors: <span class="text-secondary">(Under construction)</span></p>
             <%# book.coauthors.forEach((author) => { %>
             <div class="mb-1 border border-secondary rounded bookstats_coauthor">
-                <p class="my-1">Author Name</p>   
+                <p class="my-1">Author Name </p>   
                 <button>
                     <i class="bi bi-trash"></i>
                 </button>
@@ -36,7 +36,7 @@
                 <i class="bi bi-plus-square"></i>
             </button>
         </div>
-        <button data-bs-toggle="modal" data-bs-target="#read_editbook_modal" id="sidepanel_button_editbook" class="btn btn-primary w-100 my-1">Edit Book Info</button>
+        <button data-bs-toggle="modal" data-bs-target="#read_editbook_modal" id="sidepanel_button_editbook" class="btn btn-success w-100 my-1">Edit Book Info</button>
         <hr id="sidepanel_separator" class="my-2">
         <h3 class="text-light text-center">Chapters</h3>
         <div id="sidepanel_chapterlist" class="bg-dark rounded text-light">

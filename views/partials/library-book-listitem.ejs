@@ -1,10 +1,10 @@
-<div class="book_listitem row align-items-center bg-dark rounded my-2">
-    <div class="col-2 bg-secondary">
-        <img src="https://via.placeholder.com/175x85" alt="">
-    </div> 
+<div class="book_listitem row align-items-center bg-dark rounded my-2 p-2 justify-content-between">
     <div class="col-6">
         <h3 class="h4 text-light my-1"><%= book.title %></h3> 
         <h4 class="h6 text-secondary my-1"><em>by <%= book.author %></em></h4>
+    </div>
+    <div class="col-2">
+        <a class="btn btn-outline-warning w-100" href="/read/<%= book.id %>">Read <i class="bi bi-book"></i></a>
     </div>
     <div class="col-2">
         <% book.tags.forEach((tag) => { %>
@@ -12,7 +12,6 @@
         <% }); %>
     </div>
     <div class="col-2">
-        <a class="btn btn-outline-warning w-100" href="/read/<%= book.id %>">Read</a>
         <a class="btn btn-outline-danger w-100" href="/book/delete/<%= book.id %>">Delete</a>
     </div>
 </div>

@@ -6,6 +6,15 @@
 
 #library_browse_container {
     background-color: rgba(#000000, 0.3);
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+}
+
+.book_listitem {
+    width: 95%;
 }
 
 #library_footer {

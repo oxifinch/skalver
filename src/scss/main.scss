@@ -17,6 +17,23 @@
 @import "pages/dashboard";
 @import "pages/library";
 
+textarea {
+    resize: none;
+}
+
 .hidden {
     display: none;
+}
+
+// Bootstrap Overrides
+h1, h2, h3 {
+    font-family: "EB Garamond";
+}
+
+button, a {
+    font-family: "Montserrat";
+}
+
+button, .btn {
+    border-radius: 0.1rem;
 }

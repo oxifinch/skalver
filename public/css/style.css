@@ -11028,7 +11028,8 @@ textarea.form-control-lg {
 }
 
 #page_container_dashboard {
-  background-image: url("https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-image: url("https://images.pexels.com/photos/763135/pexels-photo-763135.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-size: cover;
 }
 
 #page_wrapper_dashboard {
@@ -11049,6 +11050,15 @@ textarea.form-control-lg {
 
 #library_browse_container {
   background-color: rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book_listitem {
+  width: 95%;
 }
 
 #library_footer {
@@ -11065,8 +11075,24 @@ textarea.form-control-lg {
   border: 1px solid darkgray;
 }
 
+textarea {
+  resize: none;
+}
+
 .hidden {
   display: none;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+  font-family: "EB Garamond";
+}
+
+button, a {
+  font-family: "Montserrat";
+}
+
+button, .btn {
+  border-radius: 0.1rem;
 }
 
 /*# sourceMappingURL=style.css.map */
