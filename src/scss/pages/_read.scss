@@ -4,7 +4,6 @@
 
 #reader_sidepanel {
     z-index: 2;
-    border: 1px solid red;
     position: fixed;
     top: 0;
     left: 0;
@@ -12,6 +11,26 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    transition: 0.25s;
+    &.closed {
+        transform: translateX(-90%);
+        transition: 0.25s;
+    }
+
+    #sidepanel_back {
+        text-decoration: none;
+        #back_arrow {
+            color: orange;
+            font-size: 1.2rem;
+        }
+        #back_label {
+            color: white;
+            text-decoration: none;
+            &:hover {
+                color: orange;
+            }
+        }
+    }
 
     #sidepanel_body {
         background-color: #444444;
@@ -20,6 +39,9 @@
         border-bottom-right-radius: 0.6rem;
         border-top-right-radius: 0.6rem;
         padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
 
         #sidepanel_title {
             padding: 0.6rem;
@@ -79,6 +101,48 @@
         #sidepanel_separator {
             color: white;
         }
+
+        #sidepanel_chapterlist {
+            padding: 0.6rem;
+            font-family: "Montserrat";
+            overflow-y: auto;
+            flex: 1;
+            p {
+                padding-left: 0.5rem;
+            }
+            .chapterlist_chapter {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                p {
+                    flex: 5;
+                    padding-left: 0.5rem;
+                }
+                a {
+                    display: none;
+                    flex: 1;
+                    text-align: center;
+                    background: none;
+                    border: none;
+                    i {
+                        color: rgba(orange, 0);
+                    }
+                }
+                &:hover {
+                    a {
+                        display: inline-block;
+                        i {
+                            color: orange;
+                        }
+                    }
+                }
+            }
+            #chapter_createnew {
+                font-size: 1.3rem;
+                color: white;
+            }
+        }
+        
     }
 
     #sidepanel_button_toggle {

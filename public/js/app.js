@@ -9,7 +9,8 @@ saveButton.addEventListener("click", () => {
     saveMarkdown();
 });
 const sidePanel = document.querySelector("#reader_sidepanel");
-sidePanel.addEventListener("click", () => {
+const sidePanelButton = document.querySelector("#sidepanel_button_toggle");
+sidePanelButton.addEventListener("click", () => {
     sidePanel.classList.toggle("closed");
 })
 const toggleEditorButtonIcon = document.querySelector("#editor_toggle_icon");
