@@ -118,8 +118,23 @@ async function deleteLibrary(req, res) {
             status: "404 - Not found."
         });
     }
-    console.log("[ DEBUG ] libraryId param: " + req.params.libraryId);
-    let parentLibrary = await Library.findById(req.params.libraryId)
+    // Looping through the user's library list to double check that the library
+    // actually belongs to them. targetId should only be set if a match is found.
+    const libraryQuery = req.params.libraryId;
+    let targetId;
+    for(let i = 0; i < user.libraries.length; i++) {
+        const currentItem = user.libraries[i];
+        if(currentItem.toString().trim() === libraryQuery.toString().trim()) {
+            targetId = currentItem;
+        }
+    }
+    if(!targetId) {
+        return res.status(404).render("pages/error", {
+            message: "The library you are trying to delete could not be found on your account",
+            status: "404 - Not found."
+        });
+    }
+    let parentLibrary = await Library.findById(targetId)
         .populate({
             path: "books",
             select: [
@@ -135,26 +150,37 @@ async function deleteLibrary(req, res) {
     }
     for(let i = 0; i < parentLibrary.books.length; i++) {
         const book = await Book.findById(parentLibrary.books[i]);
-        book.chapters.forEach((chapter) => {
-            await Chapter.fi
-        })
-    }
-    let targetId;
-    // Looping through the user's library list to double check that the library
-    // actually belongs to them.
-    for(let i = 0; i < user.libraries.length; i++) {
-        const currentItem = user.libraries[i];
-        if(currentItem === parentLibrary.id.toString().trim()) {
-            targetId = currentItem;
+        for(let j = 0; j < book.chapters.length; j++) {
+            // TODO: Not sure how errors should be handled here. Should the
+            // deletion process be aborted? 
+            Chapter.findByIdAndDelete(book.chapters[j])
+                .catch((err) => {
+                    console.log("[ DEBUG ] Failed to delete chapter. Error: ");
+                    console.log(err);
+                });
         }
+        Book.findByIdAndDelete(parentLibrary.books[i])
+            .catch((err) => {
+                console.log("[ DEBUG ] Failed to delete book. Error: ");
+                console.log(err);
+            });
     }
-    if(!targetId) {
-        return res.status(404).render("pages/error", {
-            message: "The library you are trying to delete could not be found on your account",
-            status: "404 - Not found."
+    user.libraries.pull(parentLibrary.id);
+    user.save()
+        .then(() => {
+            Library.findByIdAndDelete(targetId)
+                .then(() => {
+                    return res.status(200).redirect("/dashboard");
+                })
+                .catch((err) => {
+                    console.log("[ DEBUG ] Failed to delete library. Error: ");
+                    console.log(err);
+                });
+        })
+        .catch((err) => {
+            console.log("[ DEBUG ] Failed to save changes to user: ");
+            console.log(err);
         });
-    }
-    res.send("Found the thingy!");
 }
 
 export default {
