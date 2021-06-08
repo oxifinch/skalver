@@ -2,65 +2,290 @@
     background-image: url("https://images.pexels.com/photos/3800468/pexels-photo-3800468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
 }
 
-#reader_viewport {
-    height: 100%;
-    max-height: 100%;
-    overflow-y: hidden;
-}
+#reader_sidepanel {
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 25%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    transition: 0.25s;
+    &.closed {
+        transform: translateX(-90%);
+        transition: 0.25s;
+    }
 
-#reader_page {
-    background-color: #e8e8e8;
-    max-height: 100%;
-    height: 100%;
-}
+    #sidepanel_back {
+        text-decoration: none;
+        #back_arrow {
+            color: orange;
+            font-size: 1.2rem;
+        }
+        #back_label {
+            color: white;
+            text-decoration: none;
+            &:hover {
+                color: orange;
+            }
+        }
+    }
 
-#reader_page_content {
-    overflow-y: scroll;
-    max-height: 100%;
-    height: 100%;
-    font-family: "EB Garamond", serif;  
-    p {
-        font-size: 1.15rem;
-    }
-    h1, h2, h3, h4, h5, h6 {
-        text-align: center;
-    }
-    blockquote {
-        border-left: 2px solid darkgray;
-        text-align: left;
-        padding: 1rem 1.5rem;
-    }
-    span {
-        background-color: rgba(#b7aa91, 0.25);
-    }
-    div {
+    #sidepanel_body {
+        background-color: #444444;
+        height: 100vh;
+        width: 90%;
+        border-bottom-right-radius: 0.6rem;
+        border-top-right-radius: 0.6rem;
         padding: 1rem;
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-        background-color: rgba(#b7aa91, 0.25);
-        font-family: "Montserrat";
-        font-size: 0.9rem;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+
+        #sidepanel_title {
+            padding: 0.6rem;
+            hr {
+                margin: 0.2rem 1rem;
+            }
+            h1, h2 {
+                font-family: "EB Garamond";
+            }
+            #title_author {
+                font-family: "Montserrat";
+            }
+        }
+
+        #sidepanel_bookstats {
+            padding: 0.6rem;
+            font-family: "Montserrat";
+            hr {
+                margin: 0.2rem 0.3rem;
+            }
+            .bookstats_coauthor {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                p {
+                    flex: 5;
+                    padding-left: 0.5rem;
+                }
+                button {
+                    display: none;
+                    flex: 1;
+                    text-align: center;
+                    background: none;
+                    border: none;
+                    i {
+                        color: rgba(indianred, 0);
+                    }
+                }
+                &:hover {
+                    button {
+                        display: inline-block;
+                        i {
+                            color: indianred;
+                        }
+                    }
+                }
+            }
+
+            #bookstats_coauthor_createnew {
+                i {
+                    color: white;
+                    font-size: 1.3rem;
+                }
+            }
+        }
+
+        #sidepanel_separator {
+            color: white;
+        }
+
+        #sidepanel_chapterlist {
+            padding: 0.6rem;
+            font-family: "Montserrat";
+            overflow-y: auto;
+            flex: 1;
+            p {
+                padding-left: 0.5rem;
+            }
+            .chapterlist_chapter {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .chapterlist_chapter_link {
+                    flex: 5;
+                    padding-left: 0.5rem;
+                    color: white;
+                    &:hover {
+                        color: orange;
+                    }
+                }
+                .chapterlist_chapter_delete {
+                    display: none;
+                    flex: 1;
+                    text-align: center;
+                    background: none;
+                    border: none;
+                    i {
+                        color: rgba(indianred, 0);
+                    }
+                }
+                &:hover {
+                    .chapterlist_chapter_delete {
+                        display: inline-block;
+                        i {
+                            color: indianred;
+                        }
+                    }
+                }
+            }
+            #chapter_createnew {
+                font-size: 1.3rem;
+                color: white;
+            }
+        }
+        
     }
-    ul {
-        list-style-type: square;
+
+    #sidepanel_button_toggle {
+        text-align: center;
+        background-color: #444444;
+        border: none;
+        border-bottom-right-radius: 50%;
+        border-top-right-radius: 50%;
+        padding-left: 0;
+        font-size: 1.6rem;
+        transition: 0.15s;
+        i {
+            color: white;
+        }
+        &:hover {
+            i {
+                color: darkgray;
+                transition: 0.15s;
+            }
+        }
+    } 
+}
+
+// ----------------------
+#reader_viewport {
+    overflow-y: hidden;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+
+    #reader_page {
+        background-color: #e8e8e8;
+        max-height: 100%;
+        height: 100%;
+        width: 650px;
+        height: 95%;
+    }
+
+    #reader_page_content {
+        overflow-y: scroll;
+        max-height: 100%;
+        height: 100%;
+        font-family: "EB Garamond", serif;  
+        p {
+            font-size: 1.15rem;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            text-align: center;
+        }
+        blockquote {
+            border-left: 2px solid darkgray;
+            text-align: left;
+            padding: 1rem 1.5rem;
+        }
+        span {
+            background-color: rgba(#b7aa91, 0.25);
+        }
+        div {
+            padding: 1rem;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            background-color: rgba(#b7aa91, 0.25);
+            font-family: "Montserrat";
+            font-size: 0.9rem;
+        }
+        ul {
+            list-style-type: square;
+        }
+    }
+
+    #reader_page_markdown {
+        font-family: "Montserrat";     
+        position: relative;
+        white-space: pre-wrap;
+        padding: 0;
+        textarea {
+            position: absolute;
+            overflow-x: hidden;
+            background: none;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            resize: none; 
+            border: none;
+            font-size: 0.9rem;
+        }
+    }
+
+    .reader_page_button {
+        text-align: center;
+        font-size: 2rem;
+        margin: 2rem;
+        i {
+            transition: 0.15s;
+            color: white;    
+            &:hover {
+                color: darkgray;
+                transition: 0.15s;
+            }
+        }
     }
 }
 
-#reader_page_markdown {
-    font-family: "Montserrat";     
-    position: relative;
-    padding: 0;
-    textarea {
-        position: absolute;
-        overflow-x: hidden;
-        background: none;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        resize: none; 
-        border: none;
-        font-size: 0.9rem;
+#editor_buttongroup {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    right: 0;
+    bottom: 0;
+    margin: 2.5rem;
+
+    #editor_toggle {
+        background-color: rgba(#000000, 0.5);
+        border: 1px solid rgba(#ffffff, 0.5);
+        border-radius: 50%;
+        width: 4.5rem;
+        height: 4.5rem;
+        text-align: center;
+        font-size: 2rem;
+        i {
+            color: white;
+            transition: 0.15s;
+        }
+        &:hover {
+            i {
+                color: darkgray;
+                transition: 0.15s;
+            }
+        }
+    }
+
+    #editor_save {
+        white-space: nowrap;
+        margin-right: 1.4rem;
     }
 }
 

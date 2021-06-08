@@ -1,34 +1,30 @@
-const newChapterWindow = document.querySelector("#new_chapter_window");
+//const newChapterWindow = document.querySelector("#new_chapter_window");
 const pageContainer = document.querySelector("#reader_page");
 const pageContent = document.querySelector("#reader_page_content");
 const pageMarkdown = document.querySelector("#reader_page_markdown");
 const editorArea = document.querySelector("#reader_editor_textarea");
 editorArea.value = activeChapter.markdown;
-const saveButton = document.querySelector("#reader_save");
+const saveButton = document.querySelector("#editor_save");
 saveButton.addEventListener("click", () => {
     saveMarkdown();
 });
-const openEditorContainer = document.querySelector("#editor_closed");
-const openEditorButton = document.querySelector("#reader_openEditor");
-openEditorButton.addEventListener("click", () => {
-    toggleEditor();
-});
-const closeEditorContainer = document.querySelector("#editor_open");
-const closeEditorButton = document.querySelector("#reader_closeEditor");
-closeEditorButton.addEventListener("click", () => {
-    toggleEditor();
-});
-const createNewButton = document.querySelector("#reader_createchapter");
-createNewButton.addEventListener("click", () => {
-    toggleNewWindow();
+const sidePanel = document.querySelector("#reader_sidepanel");
+const sidePanelButton = document.querySelector("#sidepanel_button_toggle");
+sidePanelButton.addEventListener("click", () => {
+    sidePanel.classList.toggle("closed");
 })
+const toggleEditorButtonIcon = document.querySelector("#editor_toggle_icon");
+const toggleEditorButton = document.querySelector("#editor_toggle");
+toggleEditorButton.addEventListener("click", () => {
+    toggleEditor();
+});
 
 function toggleEditor() {
     pageContent.classList.toggle("hidden"); 
     pageMarkdown.classList.toggle("hidden"); 
-    openEditorContainer.classList.toggle("hidden");
-    closeEditorContainer.classList.toggle("hidden");
-    closeEditorContainer.classList.toggle("d-flex");
+    toggleEditorButtonIcon.classList.toggle("bi-pencil-square");
+    toggleEditorButtonIcon.classList.toggle("bi-x-square");
+    saveButton.classList.toggle("hidden");
     editorArea.value = activeChapter.markdown;
 }
 

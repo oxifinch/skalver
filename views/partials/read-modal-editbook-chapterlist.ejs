@@ -1,0 +1,9 @@
+<div class="text-light">
+    <h2>Chapter List</h2>
+    <hr>
+    <ul class="border border-danger">
+        <% book.chapters.forEach((chapter) => { %>
+        <li class="text-light" data-chapterid="<%=chapter.id%>" draggable="true"><%=chapter.name%></li>    
+        <% }); %>
+    </ul>
+</div>

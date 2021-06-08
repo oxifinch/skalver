@@ -1,0 +1,61 @@
+<div id="reader_sidepanel">
+    <div id="sidepanel_body">
+        <a id="sidepanel_back" href="/library">
+            <i id="back_arrow" class="bi bi-arrow-left-square"></i>
+            <i id="back_label">Go Back</i>
+        </a>
+        <div id="sidepanel_title" class="bg-dark text-light text-center my-1 rounded">
+            <hr>
+            <h1 class="h3 mb-1"><%=book.title%></h1>
+            <% if (book.subtitle) { %>
+            <h2 class="h4 mb-0"><%=book.subtitle%></h2>
+            <% } %>
+            <% if (book.author) { %>
+            <h3 id="title_author" class="h5 mb-0 mt-3 text-secondary"><em>by <%=book.author%></em></h3>
+            <% } %>
+            <hr>
+        </div>
+        <div id="sidepanel_bookstats" class="text-light bg-dark rounded">
+            <% if(book.bookType || book.bookType.trim() != "") { %>
+            <p class="mb-0">Category: <span class="span_booktype"><%=book.bookType%></span></p>
+            <% } else { %>
+            <p class="mb-0">Category: None</p>
+            <% } %>
+            <p class="mb-0">Chapters: <span class="span_chaptercount"><%= book.chapters.length %></span></p>
+            <hr>
+            <p class="mb-0">Co-Authors: </p>
+            <%# book.coauthors.forEach((author) => { %>
+            <div class="mb-1 border border-secondary rounded bookstats_coauthor">
+                <p class="my-1">Author Name</p>   
+                <button>
+                    <i class="bi bi-trash"></i>
+                </button>
+            </div>
+            <%# }); %>
+            <button id="bookstats_coauthor_createnew" class="py-0 btn btn-outline-secondary w-100">
+                <i class="bi bi-plus-square"></i>
+            </button>
+        </div>
+        <button data-bs-toggle="modal" data-bs-target="#read_editbook_modal" id="sidepanel_button_editbook" class="btn btn-primary w-100 my-1">Edit Book Info</button>
+        <hr id="sidepanel_separator" class="my-2">
+        <h3 class="text-light text-center">Chapters</h3>
+        <div id="sidepanel_chapterlist" class="bg-dark rounded text-light">
+        <% let counter = 0; %>
+        <% book.chapters.forEach((chapter) => { %> 
+        <div class="mb-1 border border-secondary rounded chapterlist_chapter">
+            <a href="/read/<%=book.id%>?chapter=<%=counter%>" class="my-1 chapterlist_chapter_link"><%=chapter.name%></a> 
+            <a href="/chapter/delete/<%=chapter.id%>" class="chapterlist_chapter_delete">
+                <i class="bi bi-trash"></i>
+            </a>
+        </div>
+        <% counter++; %>
+        <% }); %>
+        <button data-bs-toggle="modal" data-bs-target="#read_createchapter_modal" id="chapter_createnew" class="py-0 btn btn-outline-secondary w-100">
+            <i class="bi bi-plus-square"></i>
+        </button>
+        </div>
+    </div>
+    <button id="sidepanel_button_toggle">
+        <i class="bi bi-caret-left"></i>
+    </button>
+</div>

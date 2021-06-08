@@ -6,24 +6,23 @@
 		<meta name="description" content="Skalver reading page"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="/css/style.css">
-        <style>
-            .hidden {
-                display: none;
-            }
-            #reader_page_markdown {
-                white-space: pre-wrap;
-            }
-        </style>
 	</head>
 
 	<body id="page_container_reader">
-        <%- include ("../partials/read-modal-editbook.ejs", {book: book}) %>
-
-        <div id="page_wrapper_reader" class="container-fluid p-0 d-flex flex-column vh-100 justify-content-between overflow-hidden">
-            <%- include("../partials/read-header.ejs", {book: book}) %>
-            <%- include("../partials/read-viewport.ejs", {htmlOutput: htmlOutput, nextChapter: nextChapter, prevChapter: prevChapter}) %>
-            <%- include("../partials/read-footer.ejs") %>
+        <%- include("../partials/read-modal-editbook.ejs", {book: book}) %>
+        <%- include("../partials/read-modal-createchapter.ejs", {book: book}) %>
+        <%- include("../partials/read-sidepanel.ejs", {book: book})%>
+        <div id="reader_viewport_container d-flex">
+            <%- include("../partials/read-viewport.ejs", {book: book}) %>
         </div>
+
+        <div id="editor_buttongroup">
+            <button id="editor_save" class="btn btn-success hidden">Save</button>
+            <button id="editor_toggle">
+                <i id="editor_toggle_icon" class="bi bi-pencil-square"></i>
+            </button>
+        </div>
+
         <div id="cover_reader" class="fixed-top vh-100 vw-100"></div>
         <script>
             let activeChapter = <%- JSON.stringify(chapter) %>
@@ -33,4 +32,3 @@
         <script src="/js/app.js"></script>
 	</body>
 </html>
-
