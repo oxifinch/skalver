@@ -1,6 +1,7 @@
 import Library from "../models/Library.js";
 import User from "../models/User.js";
 import Book from "../models/Book.js";
+import Chapter from "../models/Chapter.js";
 //import Section from "../models/Section.js";
 
 async function loadLibrary(req, res) {
@@ -106,7 +107,58 @@ async function createLibrary(req, res) {
     });
 }
 
+async function deleteLibrary(req, res) {
+    if(!req.session.userName || !req.session.userId) {
+        res.redirect("/");
+    }
+    const user = await User.findById(req.session.userId);
+    if(!user) {
+        return res.status(404).render("pages/error", {
+            message: "Your user account could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    console.log("[ DEBUG ] libraryId param: " + req.params.libraryId);
+    let parentLibrary = await Library.findById(req.params.libraryId)
+        .populate({
+            path: "books",
+            select: [
+                "_id" 
+            ]
+        })
+        .exec();
+    if(!parentLibrary) {
+        return res.status(404).render("pages/error", {
+            message: "The library you are trying to delete could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    for(let i = 0; i < parentLibrary.books.length; i++) {
+        const book = await Book.findById(parentLibrary.books[i]);
+        book.chapters.forEach((chapter) => {
+            await Chapter.fi
+        })
+    }
+    let targetId;
+    // Looping through the user's library list to double check that the library
+    // actually belongs to them.
+    for(let i = 0; i < user.libraries.length; i++) {
+        const currentItem = user.libraries[i];
+        if(currentItem === parentLibrary.id.toString().trim()) {
+            targetId = currentItem;
+        }
+    }
+    if(!targetId) {
+        return res.status(404).render("pages/error", {
+            message: "The library you are trying to delete could not be found on your account",
+            status: "404 - Not found."
+        });
+    }
+    res.send("Found the thingy!");
+}
+
 export default {
     loadLibrary, 
-    createLibrary
+    createLibrary,
+    deleteLibrary
 };
