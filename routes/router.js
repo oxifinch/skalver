@@ -29,6 +29,7 @@ router
     // Libraries
     .get("/library", LibraryController.loadLibrary) 
     .post("/library/create", LibraryController.createLibrary)
+    .post("/library/update/:libraryId", LibraryController.editLibrary)
     .get("/library/delete/:libraryId", LibraryController.deleteLibrary)
 
     // Books/chapters

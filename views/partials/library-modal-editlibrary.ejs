@@ -1,0 +1,29 @@
+<div id="modal_library_editinfo" class="modal">
+    <div class="modal-dialog border border-secondary rounded">
+        <div class="modal-content bg-dark">
+            <div class="modal-header text-light">
+                <h3 class="modal-title">Edit Library Info</h3>
+            </div>
+            <div class="modal-body text-light">
+                <form action="/library/update/<%= library.id %>" method="POST">
+                    <div class="mb-3">
+                        <label for="edit_library_name" class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" id="edit_library_name" value="<%= library.name %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_library_description" class="form-label">Description</label>
+                        <textarea name="description" class="form-control" rows="6" id="edit_library_description"><%= library.description %></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <h3 class="h4">Custom Wallpaper</h3>
+                        <p class="mb-0">Set the mood with a wallpaper of your choosing!<br> Enter a URL to an image and it will be set as this library's background image.</p>
+                        <p class="text-secondary">(Also applies to books in this library.)</p>
+                        <label for="edit_library_wallpaper" class="form-label">Wallpaper URL</label>
+                        <input type="text" name="wallpaper" class="form-control" id="edit_library_wallpaper" value="<%= library.wallpaper %>">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
