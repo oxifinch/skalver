@@ -1,13 +1,9 @@
-<div class="container-fluid bg-dark border-bottom">
+<div class="container-fluid bg-dark border-bottom border-secondary">
     <header class="d-flex flex-wrap justify-content-between p-2">
         <a href="/dashboard" class="btn btn-outline-warning">Dashboard</a>
         <h1 class="text-light align-center h4 flex-grow-1 mb-0 px-2"><%= library.name %></h1>
-        <div class="mx-3">
-            <button class="btn btn-outline-primary">Grid</button>
-            <button class="btn btn-primary">List</button> 
-        </div>
         <div>
-           <button class="btn btn-outline-success mx-2">Edit</button> 
+           <button data-bs-toggle="modal" data-bs-target="#modal_library_editinfo" class="btn btn-success mx-2">Edit Library Info</button> 
         </div>
     </header>
 </div>

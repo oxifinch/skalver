@@ -7,7 +7,7 @@
             <div class="modal-body text-light">
                 <form action="/book/create" method="POST">
                     <div class="mb-3">
-                        <label for="create_book_title" class="form-label">Title</label>
+                        <label for="create_book_title" class="form-label">Title <span class="text-secondary">(Required)</span></label>
                         <input type="text" name="title" class="form-control" id="create_book_title" required>
                     </div>
                     <div class="mb-3">
@@ -23,7 +23,7 @@
                         <input type="text" name="author" class="form-control" id="create_book_author">
                     </div>
                     <div class="mb-3">
-                        <label for="create_book_type" class="form-label">Type</label>
+                        <label for="create_book_type" class="form-label">Category</label>
                         <input type="text" name="bookType" class="form-control" id="create_book_type">
                     </div>
                     <p class="text-secondary">Under construction: Co-authors</p>

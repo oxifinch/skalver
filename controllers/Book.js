@@ -141,6 +141,7 @@ async function deleteBook(req, res) {
                 .then((result) => {
                     console.log("[ DEBUG ] Pulled book from library. Result: ");
                     console.log(result);
+                    res.status(200).redirect("/library");
                 })
                 .catch((err) => {
                     console.log("[ DEBUG ] Failed to pull book. Error: ");

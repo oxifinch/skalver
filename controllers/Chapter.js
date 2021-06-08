@@ -1,8 +1,23 @@
 import Book from "../models/Book.js";
+import User from "../models/User.js";
+import Library from "../models/Library.js";
 import Chapter from "../models/Chapter.js";
 import mdparser from "skalver-mdparser";
 
 async function readChapter(req, res) {
+    if(!req.session.userId || !req.session.userName) {
+        return res.status(401).render("pages/error", {
+            message: "You must be logged in to view this content!",
+            status: "401 - Unauthorized."
+        });
+    }
+    const user = await User.findById(req.session.userId);
+    if(!user) {
+        return res.status(404).render("pages/error", {
+            message: "Your account could not be located.",
+            status: "404 - Not found.",
+        });
+    }
     let bookQuery = req.params.bookId;
     let chapterQuery = parseInt(req.query.chapter);
     if(!chapterQuery) {
@@ -36,6 +51,8 @@ async function readChapter(req, res) {
                 break;
             }
         }
+        // Getting the wallpaper from the active library
+        const activeLibrary = await Library.findById(user.activeLibrary);
         let nextQuery = chapterNumber + 1;
         let prevQuery = chapterNumber < 1 ? 0 : chapterNumber - 1;
         try {
@@ -46,6 +63,7 @@ async function readChapter(req, res) {
                 chapter: chapterData,
                 htmlOutput: htmlOutput,
                 chapterNumber: chapterNumber,
+                wallpaper: activeLibrary.wallpaper,
                 nextChapter: `/read/${parentBook.id}?chapter=${nextQuery}`,
                 prevChapter: `/read/${parentBook.id}?chapter=${prevQuery}`,
             });
@@ -149,4 +167,48 @@ async function createChapter(req, res) {
     }
 }
 
-export default {readChapter, updateChapter, createChapter};
+async function deleteChapter(req, res) {
+    let parentBook = await Book.findById(req.params.bookId);
+    if(!parentBook) {
+        return res.status(404).render("pages/error", {
+            message: "The book this chapter belongs to could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    let targetChapter = await Chapter.findById(req.params.chapterId);
+    if(!targetChapter) {
+        return res.status(404).render("pages/error", {
+            message: "The chapter you are trying to delete could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    let targetId;
+    for(let i = 0; i < parentBook.chapters.length; i++) {
+        const currentItem = parentBook.chapters[i].toString().trim();
+        if(currentItem === targetChapter.id.toString().trim()) {
+            targetId = parentBook.chapters[i];
+        }
+    }
+    Chapter.findByIdAndDelete(targetId)
+        .then((result) => {
+            console.log("[ DEBUG ] Deleted chapter: ");
+            console.log(result);
+            parentBook.chapters.pull(targetId);
+            parentBook.save()
+                .then((result) => {
+                    console.log("[ DEBUG ] Pulled chapter from book. Result: ");
+                    console.log(result);
+                    return res.status(200).redirect(`/read/${parentBook.id}`);
+                })
+                .catch((err) => {
+                    console.log(" [ DEBUG ] Failed to pull chapter. Error: ");
+                    console.log(err);
+                })
+        })
+        .catch((err) => {
+            console.log("[ DEBUG ] Failed to delete chapter. Error: ");
+            console.log(err);
+        })
+}
+
+export default {readChapter, updateChapter, createChapter, deleteChapter};

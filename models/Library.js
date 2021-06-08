@@ -17,7 +17,12 @@ const librarySchema = new mongoose.Schema({
     //],
     books: [
         {type: mongoose.Types.ObjectId, ref: "book"}
-    ]
+    ],
+    wallpaper: {
+        type: String,
+        maxLength: 1000,
+        required: false
+    }
 }, {collection: "libraries"});
 
 export default mongoose.model("library", librarySchema);
