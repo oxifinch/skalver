@@ -10942,7 +10942,9 @@ textarea.form-control-lg {
   padding: 1rem 1.5rem;
 }
 #reader_viewport #reader_page_content span {
-  background-color: rgba(183, 170, 145, 0.25);
+  background-color: rgba(242, 201, 113, 0.25);
+  padding: 0.2rem;
+  border-radius: 0.2rem;
 }
 #reader_viewport #reader_page_content div {
   padding: 1rem;
@@ -11020,7 +11022,7 @@ textarea.form-control-lg {
 }
 
 #cover_reader {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 24px 24px black inset;
   z-index: -1;
 }

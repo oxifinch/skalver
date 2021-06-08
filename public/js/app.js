@@ -10,8 +10,11 @@ saveButton.addEventListener("click", () => {
 });
 const sidePanel = document.querySelector("#reader_sidepanel");
 const sidePanelButton = document.querySelector("#sidepanel_button_toggle");
+const sidePanelIcon = document.querySelector("#sidepanel_button_icon");
 sidePanelButton.addEventListener("click", () => {
     sidePanel.classList.toggle("closed");
+    sidePanelIcon.classList.toggle("bi-caret-left");
+    sidePanelIcon.classList.toggle("bi-caret-right");
 })
 const toggleEditorButtonIcon = document.querySelector("#editor_toggle_icon");
 const toggleEditorButton = document.querySelector("#editor_toggle");

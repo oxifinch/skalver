@@ -13,7 +13,7 @@
         <%- include("../partials/read-modal-createchapter.ejs", {book: book}) %>
         <%- include("../partials/read-sidepanel.ejs", {book: book})%>
         <div id="reader_viewport_container d-flex">
-            <%- include("../partials/read-viewport.ejs", {book: book}) %>
+            <%- include("../partials/read-viewport.ejs", {book: book, nextChapter: nextChapter, prevChapter: prevChapter}) %>
         </div>
 
         <div id="editor_buttongroup">
@@ -25,6 +25,11 @@
 
         <div id="cover_reader" class="fixed-top vh-100 vw-100"></div>
         <script>
+            <% if(wallpaper && wallpaper.toString().trim() != "") { %>
+                   const background = document.querySelector("#page_container_reader");
+                   background.style.backgroundImage = `url("<%=wallpaper%>")`;
+                   background.style.backgroundSize = "cover";
+            <% } %>
             let activeChapter = <%- JSON.stringify(chapter) %>
             let parentBook = <%- JSON.stringify(book) %>
         </script>

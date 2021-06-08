@@ -205,7 +205,9 @@
             padding: 1rem 1.5rem;
         }
         span {
-            background-color: rgba(#b7aa91, 0.25);
+            background-color: rgba(#f2c971, 0.25);
+            padding: 0.2rem;
+            border-radius: 0.2rem;
         }
         div {
             padding: 1rem;
@@ -291,7 +293,7 @@
 }
 
 #cover_reader {
-    background-color: rgba(#000000, 0.7);
+    background-color: rgba(#000000, 0.5);
     box-shadow: 0 0 24px 24px black inset;
     z-index: -1;
 }
