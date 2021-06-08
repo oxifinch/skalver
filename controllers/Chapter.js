@@ -149,4 +149,48 @@ async function createChapter(req, res) {
     }
 }
 
-export default {readChapter, updateChapter, createChapter};
+async function deleteChapter(req, res) {
+    let parentBook = await Book.findById(req.params.bookId);
+    if(!parentBook) {
+        return res.status(404).render("pages/error", {
+            message: "The book this chapter belongs to could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    let targetChapter = await Chapter.findById(req.params.chapterId);
+    if(!targetChapter) {
+        return res.status(404).render("pages/error", {
+            message: "The chapter you are trying to delete could not be located.",
+            status: "404 - Not found."
+        });
+    }
+    let targetId;
+    for(let i = 0; i < parentBook.chapters.length; i++) {
+        const currentItem = parentBook.chapters[i].toString().trim();
+        if(currentItem === targetChapter.id.toString().trim()) {
+            targetId = parentBook.chapters[i];
+        }
+    }
+    Chapter.findByIdAndDelete(targetId)
+        .then((result) => {
+            console.log("[ DEBUG ] Deleted chapter: ");
+            console.log(result);
+            parentBook.chapters.pull(targetId);
+            parentBook.save()
+                .then((result) => {
+                    console.log("[ DEBUG ] Pulled chapter from book. Result: ");
+                    console.log(result);
+                    return res.status(200).redirect(`/read/${parentBook.id}`);
+                })
+                .catch((err) => {
+                    console.log(" [ DEBUG ] Failed to pull chapter. Error: ");
+                    console.log(err);
+                })
+        })
+        .catch((err) => {
+            console.log("[ DEBUG ] Failed to delete chapter. Error: ");
+            console.log(err);
+        })
+}
+
+export default {readChapter, updateChapter, createChapter, deleteChapter};

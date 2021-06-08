@@ -44,7 +44,7 @@
         <% book.chapters.forEach((chapter) => { %> 
         <div class="mb-1 border border-secondary rounded chapterlist_chapter">
             <a href="/read/<%=book.id%>?chapter=<%=counter%>" class="my-1 chapterlist_chapter_link"><%=chapter.name%></a> 
-            <a href="/chapter/delete/<%=chapter.id%>" class="chapterlist_chapter_delete">
+            <a href="/chapter/delete/<%=book.id%>/<%=chapter.id%>" class="chapterlist_chapter_delete">
                 <i class="bi bi-trash"></i>
             </a>
         </div>

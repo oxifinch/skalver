@@ -36,18 +36,6 @@ async function loadLibrary(req, res) {
     }
     user.activeLibrary = requestedLibrary;
     let libraryData = await Library.findById(user.activeLibrary)
-        //.populate({
-        //    path: "sections",
-        //    populate: {
-        //        path: "books",
-        //        select: [
-        //            "title",
-        //            "author",
-        //            "subtitle",
-        //            "tags",
-        //        ]
-        //    }
-        //})
         .populate({
             path: "books",
             select: [
