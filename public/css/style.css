@@ -10862,25 +10862,29 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: center;
 }
-#reader_sidepanel #sidepanel_body #sidepanel_chapterlist .chapterlist_chapter p {
+#reader_sidepanel #sidepanel_body #sidepanel_chapterlist .chapterlist_chapter .chapterlist_chapter_link {
   flex: 5;
   padding-left: 0.5rem;
+  color: white;
 }
-#reader_sidepanel #sidepanel_body #sidepanel_chapterlist .chapterlist_chapter a {
+#reader_sidepanel #sidepanel_body #sidepanel_chapterlist .chapterlist_chapter .chapterlist_chapter_link:hover {
+  color: orange;
+}
+#reader_sidepanel #sidepanel_body #sidepanel_chapterlist .chapterlist_chapter .chapterlist_chapter_delete {
   display: none;
   flex: 1;
   text-align: center;
   background: none;
   border: none;
 }
-#reader_sidepanel #sidepanel_body #sidepanel_chapterlist .chapterlist_chapter a i {
-  color: rgba(255, 165, 0, 0);
+#reader_sidepanel #sidepanel_body #sidepanel_chapterlist .chapterlist_chapter .chapterlist_chapter_delete i {
+  color: rgba(205, 92, 92, 0);
 }
-#reader_sidepanel #sidepanel_body #sidepanel_chapterlist .chapterlist_chapter:hover a {
+#reader_sidepanel #sidepanel_body #sidepanel_chapterlist .chapterlist_chapter:hover .chapterlist_chapter_delete {
   display: inline-block;
 }
-#reader_sidepanel #sidepanel_body #sidepanel_chapterlist .chapterlist_chapter:hover a i {
-  color: orange;
+#reader_sidepanel #sidepanel_body #sidepanel_chapterlist .chapterlist_chapter:hover .chapterlist_chapter_delete i {
+  color: indianred;
 }
 #reader_sidepanel #sidepanel_body #sidepanel_chapterlist #chapter_createnew {
   font-size: 1.3rem;

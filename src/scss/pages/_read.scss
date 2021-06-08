@@ -114,25 +114,29 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                p {
+                .chapterlist_chapter_link {
                     flex: 5;
                     padding-left: 0.5rem;
+                    color: white;
+                    &:hover {
+                        color: orange;
+                    }
                 }
-                a {
+                .chapterlist_chapter_delete {
                     display: none;
                     flex: 1;
                     text-align: center;
                     background: none;
                     border: none;
                     i {
-                        color: rgba(orange, 0);
+                        color: rgba(indianred, 0);
                     }
                 }
                 &:hover {
-                    a {
+                    .chapterlist_chapter_delete {
                         display: inline-block;
                         i {
-                            color: orange;
+                            color: indianred;
                         }
                     }
                 }
