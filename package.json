@@ -35,6 +35,6 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mongoose": "^5.12.11",
-    "skalver-mdparser": "^0.1.0"
+    "skalver-mdparser": "^0.7.0"
   }
 }

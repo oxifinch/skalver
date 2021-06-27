@@ -40,7 +40,9 @@ mongoose.connect(DB_CONNECTION_STRING, {
     useNewUrlParser: true,
 })
 .then(() => console.log("[ INFO ] Connected to DB."))
-.catch(() => console.log("[ ERROR ] Failed to connect to DB."));
+.catch((err) => {
+    console.log(err);
+});
 
 
 app.listen(PORT, () => {

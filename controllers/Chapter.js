@@ -57,11 +57,12 @@ async function readChapter(req, res) {
         let prevQuery = chapterNumber < 1 ? 0 : chapterNumber - 1;
         try {
             let chapterData = await Chapter.findById(chapterId);
-            let htmlOutput = mdparser.parse_markdown(chapterData.markdown);
+            let chapterContent = await JSON.parse(mdparser.parse_markdown(chapterData.markdown));
             res.status(200).render("pages/read", {
                 book: parentBook,
                 chapter: chapterData,
-                htmlOutput: htmlOutput,
+                htmlOutput: chapterContent.html,
+                tags: chapterContent.tags,
                 chapterNumber: chapterNumber,
                 wallpaper: activeLibrary.wallpaper,
                 nextChapter: `/read/${parentBook.id}?chapter=${nextQuery}`,
@@ -98,12 +99,14 @@ async function updateChapter(req, res) {
         });
     }
     chapter.markdown = newMarkdown.toString();
+    const chapterContent = await JSON.parse(mdparser.parse_markdown(chapter.markdown));
+    chapter.tags = chapterContent.tags;
     chapter.save()
         .then((result) => {
-            const htmlOutput = mdparser.parse_markdown(result.markdown);
             res.status(200).json({
                 markdown: result.markdown,
-                htmlOutput: htmlOutput
+                htmlOutput: chapterContent.html,
+                tags: result.tags
             });
         })
         .catch((err) => {
